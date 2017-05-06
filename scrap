@@ -1,0 +1,72 @@
+test runs:
+python generate_fractal_image.py -a buddhabrot -c hue_range -hs 300 -he 40 -W 400 -H 300 -vl -2.0 -vr 1.0 -A second_hue_rotation
+python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 400 -H 300 -vl -2.0 -vr 2.0 -A first_hue_rotation -i 50 -cr -0.844 -ci 0.2
+python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 800 -H 600 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A first_hue_rotation -i 40 -cr -0.844 -ci 0.2
+python generate_fractal_image.py -a mandelbrot -c hue_cyclic -hs 0 -hss 30 -cc 10 -W 800 -H 600 -vl -2 -vr 0.5
+python generate_fractal_image.py -a mandelbrot -c hue_cyclic -hs 360 -hss -30 -cc 10 -W 800 -H 600 -vl -1.3352377777777777 -vr -0.9387577777777778 -vt 0.4473333333333333 -vb 0.19146666666666673 -A hue_cycle -i 36
+python generate_fractal_image.py -a mandelbrot -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -1.1896239794690346 -vr -1.1835122601483867 -vt 0.3054138558154656 -vb 0.3003469045869388 -A hue_cycle -i 30
+python generate_fractal_image.py -a mandelbrot -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -1.3352377777777777 -vr -0.9387577777777778 -vt 0.4473333333333333 -vb 0.19146666666666673 -A hue_cycle -i 30
+python generate_fractal_image.py -a julia -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A hue_cycle -i 30 -cr -0.844 -ci 0.2
+python generate_fractal_image.py -a julia -c hue_cyclic -hs 0 -hss 3 -cc 120 -W 1600 -H 1200 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A hue_cycle -i 120 -cr -0.844 -ci 0.2
+python generate_fractal_image.py -a julia -c hue_cyclic -hs 0 -hss 5 -cc 10 -W 800 -H 600 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A hue_cycle -i 30 -cr -0.844 -ci 0.2
+python generate_fractal_image.py -a newton -c hue_cyclic -hs 0 -hss 5 -cc 20 -W 800 -H 600 -vl -5 -vr 5 -vt 5 -vb -5 -A hue_cycle -i 72
+python generate_fractal_image.py -a newton -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -5 -vr 5 -vt 5 -vb -5 -A hue_cycle -i 30
+python generate_fractal_image.py -a star -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -2 -vr 2 -vt 2 -vb -2 -A hue_cycle -i 30
+python generate_fractal_image.py -a star -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl 0.5 -vr 2 -vt -0.5 -vb -2 -A hue_cycle -i 30
+python generate_fractal_image.py -a burning_ship -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -2 -vr 1.5 -vt -2 -vb 1 -A hue_cycle -i 30
+python generate_fractal_image.py -a burning_ship -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -1.880420575360875 -vr -1.6002390789722365 -vt -0.08097776390759036 -vb 0.03292038811945275 -A hue_cycle -i 30
+python generate_fractal_image.py -a phoenix_mandelbrot -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -2.25 -vr 2.25 -vt 1.5 -vb -1.5 -A hue_cycle -i 30
+python generate_fractal_image.py -a cubic_mandelbrot -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 400 -H 800 -vl -0.75 -vr 0.75 -vt 1.5 -vb -1.5 -A hue_cycle -i 30
+python generate_fractal_image.py -a cubic_mandelbrot -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -0.36845399999999995 -vr -0.01810400000000012 -vt -1.031008 -vb -1.293790222222222 -A hue_cycle -i 30
+python generate_fractal_image.py -a quartic_mandelbrot -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.5 -vb -1.5 -A hue_cycle -i 30
+python generate_fractal_image.py -a newton -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl 3.2 -vr 8.35 -vt -8.369 -vb -12 -A hue_cycle -i 30
+python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.13 -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.25 -vb -1.25 -A hue_cycle -i 30
+python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.13 -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl 0.18167315999999986 -vr 0.23479310666666653 -vt 0.8372443851851852 -vb 0.8010526222222223 -A hue_cycle -i 30
+
+python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.135 -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.25 -vb -1.25 -A hue_cycle -i 30
+python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.135 -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl 0.18167315999999986 -vr 0.23479310666666653 -vt 0.8372443851851852 -vb 0.8010526222222223 -A hue_cycle -i 30
+
+python generate_fractal_image.py -c hue_range -hs 0 -he 2400 -W 400 -H 300 -A random_walk -i 50
+
+
+notes on possible schema file implementation in the future
+python generate_fractal_image.py -f scheme.scm
+
+{
+    'type': (image|gif|video),
+    'height': <int>,
+    'width': <int>,
+    'fractal':
+        {
+            'algorithm': <fractal algorithm>,
+            'precision': <int>,
+            'real_constant': <float>,
+            'imaginary_constant': <float>,
+            'viewport_left': <float>,
+            'viewport_right': <float>,
+            'viewport_top': <float>,
+            'viewport_bottom': <float>,
+        }
+    'animation':
+        {
+            'frames': <int>,
+            'end_frame_values':
+                {
+                    'real_constant': <float>,
+                    'imaginary_constant': <float>,
+                    'viewport_left': <float>,
+                    'viewport_right': <float>,
+                    'viewport_top': <float>,
+                    'viewport_bottom': <float>,
+                }
+        },
+    'coloring':
+        {
+            'algorithm': (hue_cyclic|hue_range|hue_cycle|second_hue_rotation|first_hue_rotation),
+            'hue_start_degree': <int>,
+            'hue_step_shift': <int>,
+            'hue_end_degree': <int>,
+            'color_count': <int>
+        }
+}
+
