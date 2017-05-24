@@ -16,7 +16,7 @@ python generate_fractal_image.py -a star -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 8
 python generate_fractal_image.py -a burning_ship -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -2 -vr 1.5 -vt -2 -vb 1 -A hue_cycle -i 30
 python generate_fractal_image.py -a burning_ship -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -1.880420575360875 -vr -1.6002390789722365 -vt -0.08097776390759036 -vb 0.03292038811945275 -A hue_cycle -i 30
 python generate_fractal_image.py -a phoenix_mandelbrot -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -2.25 -vr 2.25 -vt 1.5 -vb -1.5 -A hue_cycle -i 30
-python generate_fractal_image.py -a cubic_mandelbrot -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 400 -H 800 -vl -0.75 -vr 0.75 -vt 1.5 -vb -1.5 -A hue_cycle -i 30
+python generate_fractal_image.py -a cubic_mandelbrot -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.5 -vb -1.5 -A hue_cycle -i 30
 python generate_fractal_image.py -a cubic_mandelbrot -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -0.36845399999999995 -vr -0.01810400000000012 -vt -1.031008 -vb -1.293790222222222 -A hue_cycle -i 30
 python generate_fractal_image.py -a quartic_mandelbrot -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.5 -vb -1.5 -A hue_cycle -i 30
 python generate_fractal_image.py -a newton -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl 3.2 -vr 8.35 -vt -8.369 -vb -12 -A hue_cycle -i 30
@@ -24,7 +24,6 @@ python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.13 -c hue_cyc
 python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.13 -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl 0.18167315999999986 -vr 0.23479310666666653 -vt 0.8372443851851852 -vb 0.8010526222222223 -A hue_cycle -i 30
 
 python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.135 -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.25 -vb -1.25 -A hue_cycle -i 30
-python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.135 -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl 0.18167315999999986 -vr 0.23479310666666653 -vt 0.8372443851851852 -vb 0.8010526222222223 -A hue_cycle -i 30
 
 python generate_fractal_image.py -c hue_range -hs 0 -he 2400 -W 400 -H 300 -A random_walk -i 50
 

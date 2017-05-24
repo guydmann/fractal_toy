@@ -50,7 +50,7 @@ class Julia(IterativeFractal):
             np.add(z, c, z)
 
             rem = abs(z)>self.breakout
-            img[ix[rem], iy[rem]] = i
+            img[ix[rem], iy[rem]] = i+1
             rem = -rem
             z = z[rem]
             ix, iy = ix[rem], iy[rem]
