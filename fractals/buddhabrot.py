@@ -14,7 +14,7 @@ class Buddhabrot(TraversalFractal):
         self.set_viewport_left(-1.5)
         self.set_viewport_right(0.5)
 
-    def dwell(self, cx, cy):
+    def dwell_cell(self, cx, cy):
         x = cx
         y = cy
         x2 = x * x
@@ -31,8 +31,8 @@ class Buddhabrot(TraversalFractal):
             j_t = int(floor((x-self.viewport['left_x'])/self.x_inc))
             k_t = int(floor((self.viewport['top_y']-y)/self.y_inc))
             if 0 <= j_t < self.width and 0 <= k_t < self.height:
-                if self.fractal_array[j_t][k_t]['count'] == self.precision:
-                    self.fractal_array[j_t][k_t]['count'] = 1
+                if self.fractal_array[j_t][k_t] == self.precision:
+                    self.fractal_array[j_t][k_t] = 1
                 else:
-                    self.fractal_array[j_t][k_t]['count'] += 1
+                    self.fractal_array[j_t][k_t] += 1
         return self.fractal_array

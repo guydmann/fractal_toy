@@ -32,8 +32,15 @@ class Fractal(object):
     preprocessed = False
     generate_image = True
 
-    def dwell(self, x, y):
+    def dwell_cell(self, x, y):
         pass
+
+    def dwell(self):
+        for cx in range(self.width):
+            for cy in range(self.height):
+                self.fractal_array[cx][cy] = \
+                    self.dwell_cell((cx*self.x_inc)+self.viewport['left_x'], self.viewport['top_y']-(cy*self.y_inc))
+
 
     def preprocess(self):
         self.verify_data_preprocessing()
@@ -186,5 +193,5 @@ class Fractal(object):
         it is used to store the data about the fractals
         @returns an allocated array
         """
-        new_fractal_array = [[{'count': 0, 'x': None, 'y': None} for i in range(num_cols)] for j in range(num_rows)]
+        new_fractal_array = [[0 for i in range(num_cols)] for j in range(num_rows)]
         return new_fractal_array

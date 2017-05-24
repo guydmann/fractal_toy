@@ -11,7 +11,7 @@ class Newton(IterativeFractal):
     def __init__(self):
         super(IterativeFractal, self).__init__()
 
-    def dwell(self, cx, cy):
+    def dwell_cell(self, cx, cy):
         absv2 = 1.0
         x = cx
         y = cy
@@ -36,4 +36,4 @@ class Newton(IterativeFractal):
 
         if absv2 > self.breakout:
             count = self.precision
-        return {'count': count, 'x': x, 'y': y}
+        return count

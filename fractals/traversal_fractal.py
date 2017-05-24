@@ -22,7 +22,7 @@ class TraversalFractal(Fractal):
             print "Calculating Fractal"
             for cx in range(self.width):
                 for cy in range(self.height):
-                    self.dwell((cx*self.x_inc)+self.viewport['left_x'], self.viewport['top_y']-(cy*self.y_inc))
+                    self.dwell_cell((cx*self.x_inc)+self.viewport['left_x'], self.viewport['top_y']-(cy*self.y_inc))
                 if self.show_progress_bar:
                     calc_cols_pbar.update(cx+1)
             if self.show_progress_bar:

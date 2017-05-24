@@ -13,7 +13,7 @@ class BurningShip(IterativeFractal):
                 'top_y': -2.0,
                 'bottom_y': 1.0}
 
-    def dwell(self, cx, cy):
+    def dwell_cell(self, cx, cy):
         x = cx
         y = cy
         x2 = x * x
@@ -26,4 +26,4 @@ class BurningShip(IterativeFractal):
             x = x2 - y2 + cx
             x2 = x * x
             y2 = y * y
-        return {'count': count, 'x': x, 'y': y}
+        return count

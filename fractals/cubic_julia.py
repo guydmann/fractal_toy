@@ -10,7 +10,7 @@ class CubicJulia(Julia):
     def __init__(self):
         super(Julia, self).__init__()
 
-    def dwell(self, cx, cy):
+    def dwell_cell(self, cx, cy):
         x = cx
         y = cy
 
@@ -36,4 +36,4 @@ class CubicJulia(Julia):
 
             x2 = x * x
             y2 = y * y
-        return {'count': count, 'x': x, 'y': y}
+        return count

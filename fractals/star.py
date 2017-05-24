@@ -9,7 +9,7 @@ class Star(IterativeFractal):
     px = .289
     py = .928
 
-    def dwell(self, cx, cy):
+    def dwell_cell(self, cx, cy):
 
         absv = 1.0
         x = cx
@@ -34,4 +34,4 @@ class Star(IterativeFractal):
 
         if absv > self.breakout:
             count = self.precision
-        return {'count': count, 'x': x, 'y': y}
+        return count

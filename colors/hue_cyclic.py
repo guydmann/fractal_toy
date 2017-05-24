@@ -33,8 +33,8 @@ class HueCyclic(Color):
         self.verify_data()
 
         color = (0, 0, 0)
-        if pixel_data['count'] < self.precision:
-            modcolor = pixel_data['count'] % self.color_count
+        if pixel_data < self.precision:
+            modcolor = pixel_data % self.color_count
             h = round(modcolor*(self.color_step_shift))+self.start_degree
             color = self.hsv_to_rgb(h%360, 100, 100)
         return color

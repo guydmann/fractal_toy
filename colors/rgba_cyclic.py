@@ -33,8 +33,8 @@ class RGBACyclic(Color):
         self.verify_data()
 
         color = (0, 0, 0)
-        if pixel_data['count'] < self.precision:
-            modcolor = pixel_data['count'] % self.color_count
+        if pixel_data < self.precision:
+            modcolor = pixel_data % self.color_count
             R = self.start_color['red'] + ((modcolor*self.color_step_shift['red'])%255)
             G = self.start_color['green'] + ((modcolor*self.color_step_shift['green'])%255)
             B = self.start_color['blue'] + ((modcolor*self.color_step_shift['blue'])%255)

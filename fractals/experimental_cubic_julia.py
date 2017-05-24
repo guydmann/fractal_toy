@@ -10,7 +10,7 @@ class ExperimentalCubicJulia(Julia):
     def __init__(self):
         super(Julia, self).__init__()
 
-    def dwell(self, cx, cy):
+    def dwell_cell(self, cx, cy):
         x = cx
         y = cy
 
@@ -72,4 +72,4 @@ class ExperimentalCubicJulia(Julia):
         else:
             count = count2
 
-        return {'count': count, 'x': x, 'y': y}
+        return count

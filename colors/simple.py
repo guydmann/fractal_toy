@@ -5,14 +5,14 @@ class Simple(Color):
         self.verify_data()
 
         color = (0, 0, 0)
-        if pixel_data['count'] < self.precision*.03:
+        if pixel_data < self.precision*.03:
             color = (255, 0, 0, 255)
-        elif pixel_data['count'] < self.precision*.05:
+        elif pixel_data < self.precision*.05:
             color = (255, 255, 0, 255)
-        elif pixel_data['count'] < self.precision*.1:
+        elif pixel_data < self.precision*.1:
             color = (0, 255, 0, 255)
-        elif pixel_data['count'] < self.precision*.2:
+        elif pixel_data < self.precision*.2:
             color = (0, 255, 255, 255)
-        elif pixel_data['count'] < self.precision:
+        elif pixel_data < self.precision:
             color = (0, 0, 255, 255)
         return color
