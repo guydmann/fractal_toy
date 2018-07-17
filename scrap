@@ -1,3 +1,5 @@
+notes: phoenix algorithm is wrong, to correct check http://usefuljs.net/fractals/docs/mandelvariants.html for correct algorithm
+
 test runs:
 python generate_fractal_image.py -a buddhabrot -c hue_range -hs 300 -he 40 -W 400 -H 300 -vl -2.0 -vr 1.0 -A second_hue_rotation
 python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 400 -H 300 -vl -2.0 -vr 2.0 -A first_hue_rotation -i 50 -cr -0.844 -ci 0.2

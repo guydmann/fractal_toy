@@ -56,8 +56,11 @@ class CubicJulia(Julia):
         for i in xrange(self.precision):
             if not len(z): break
 
+            #z <= z(n-1)^3 +c
+            zn_minus1 = np.copy(z)
             np.multiply(z, z, z)
-            np.multiply(z, z, z)
+            np.multiply(z, zn_minus1, z)
+            del zn_minus1
             np.add(z, c, z)
 
             rem = abs(z)>self.breakout
