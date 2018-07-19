@@ -152,7 +152,7 @@ if __name__ == "__main__":
 
     # animation variables
     parser.add_argument('-A', '--fractal_animation',  type=str, help='int to select animation',
-                        choices=['first_hue_rotation', 'second_hue_rotation', 'hue_cycle'])
+                        choices=['first_hue_rotation', 'second_hue_rotation', 'hue_cycle', 'random_walk'])
     parser.add_argument('-i', '--increments', default=40, type=int)
     # parser.add_argument('-cl', '--constant_left', type=float)
     # parser.add_argument('-cr', '--constant_right', type=float)

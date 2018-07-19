@@ -3,7 +3,7 @@ from progressbar import ProgressBar
 from imageio import mimsave, imread
 from animations.animation import Animation
 from fractals.julia import Julia
-import math
+import numpy as np
 import copy
 import random
 
@@ -18,7 +18,7 @@ class RandomWalk(Animation):
 
         fractal_backup = copy.deepcopy(self.fractal)
 
-        calc_pbar = ProgressBar(maxval=360)
+        calc_pbar = ProgressBar(maxval=self.increments*2)
         print("Generating Mandelbrot Set")
         self.fractal.set_bypass_image_generation(True)
         self.render_fractal()
@@ -26,27 +26,51 @@ class RandomWalk(Animation):
         random_x = random.randint(0, self.fractal.width-1)
         random_y = random.randint(0, self.fractal.height-1)
         print("Searching for Starting Point")
-        while (self.fractal.fractal_array[random_x][random_y]['count'] < self.fractal.precision*.8):
+        while (self.fractal.fractal_array[random_x][random_y] > self.fractal.precision*.8):
             random_x = random.randint(0, self.fractal.width-1)
             random_y = random.randint(0, self.fractal.height-1)
+
+        x = np.linspace(self.fractal.viewport['left_x'], self.fractal.viewport['right_x'], self.fractal.width)[random_x]
+        y = np.linspace(self.fractal.viewport['bottom_y'], self.fractal.viewport['top_y'], self.fractal.height)[random_y]
+
+
 
         print("Creating Fractal Images")
         calc_pbar.start()
         results = []
 
+        self.fractal = Julia()
+        self.fractal.set_directory(fractal_backup.directory)
+        self.fractal.set_color_algorithm_name(fractal_backup.color_algorithm_name)
+        self.fractal.set_color_algorithm(fractal_backup.color_algorithm)
+
+        self.fractal.set_width(fractal_backup.width)
+        self.fractal.set_height(fractal_backup.height)
+        self.fractal.set_precision(fractal_backup.precision)
+
+        self.fractal.set_real_constant(x)
+        self.fractal.set_imaginary_constant(y)
 
         for k in range(self.increments):
-            self.fractal = Julia()
-            # self.fractal
-            self.fractal.set_filename("{}{}_{}_{}_{}".format(self.fractal.directory,
+
+            self.fractal.set_filename("{}{}_{}_forward".format(self.fractal.directory,
                                                              self.animation_name,
-                                                             k,
-                                                             self.fractal.color_algorithm.start_degree,
-                                                             self.fractal.color_algorithm.end_degree))
+                                                             k))
             results.append(self.render_fractal())
-            self.fractal.color_algorithm.set_start_degree((int)(math.sin(math.radians(h_start+(multiplier*k)))*360))
-            self.fractal.color_algorithm.set_end_degree((int)(math.sin(math.radians(h_end+(multiplier*k)))*360))
             calc_pbar.update(k)
+            self.fractal.set_real_constant(x - (k*((x/5)/self.increments)))
+            self.fractal.set_imaginary_constant(y - (k*((y/5)/self.increments)))
+
+        for k in range(self.increments):
+
+            self.fractal.set_filename("{}{}_{}_backward".format(self.fractal.directory,
+                                                             self.animation_name,
+                                                             k))
+            results.append(self.render_fractal())
+            calc_pbar.update(self.increments+k)
+            self.fractal.set_real_constant(x + (k*((x/5)/self.increments)) - (x/5))
+            self.fractal.set_imaginary_constant(y + (k*((y/5)/self.increments)) - (y/5))
+
         calc_pbar.finish()
 
         for image_file in results:
