@@ -1,7 +1,6 @@
 from __future__ import division
 from progressbar import ProgressBar
-from imageio import mimsave
-from PIL import Image
+from imageio import mimsave, imread
 from animations.animation import Animation
 from fractals.julia import Julia
 import math
@@ -51,6 +50,6 @@ class RandomWalk(Animation):
         calc_pbar.finish()
 
         for image_file in results:
-            self.images.append(Image.open(image_file).convert('RGBA'))
+            self.images.append(imread(image_file))
 
         mimsave("{}.gif".format(self.filename), self.images)
