@@ -38,12 +38,12 @@ class Color(object):
         # We accept saturation and value arguments from 0 to 100 because that's
         # how Photoshop represents those values. Internally, however, the
         # saturation and value are calculated from a range of 0 to 1. We make
-        #That conversion here. \
+        # that conversion here.
         s /= 100
         v /= 100
 
         if s == 0:
-            #Achromatic (grey)
+            # Achromatic (grey)
             r = g = b = v
             return [round(r * 255), round(g * 255), round(b * 255)]
 
@@ -80,4 +80,4 @@ class Color(object):
             g = p
             b = q
 
-        return (int(round(r * 255)), int(round(g * 255)), int(round(b * 255)))
+        return int(round(r * 255)), int(round(g * 255)), int(round(b * 255))

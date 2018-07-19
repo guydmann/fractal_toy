@@ -1,4 +1,5 @@
-from color import Color
+from colors.color import Color
+
 
 class Simple(Color):
     def color_pixel(self, pixel_data):

@@ -1,8 +1,6 @@
 from __future__ import division
 from math import floor
-from buddhabrot import Buddhabrot
-
-__author__ = 'guydmann'
+from fractals.buddhabrot import Buddhabrot
 
 
 class BuddhabrotJulia(Buddhabrot):

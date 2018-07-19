@@ -1,7 +1,5 @@
-from julia import Julia
+from fractals.julia import Julia
 import numpy as np
-
-__author__ = 'guydmann'
 
 
 class QuarticJulia(Julia):
@@ -34,16 +32,15 @@ class QuarticJulia(Julia):
             y2 = y * y
         return count
 
-
     def dwell(self):
         x = np.full((self.width, self.height), self.cr)
         y = np.full((self.width, self.height), self.ci)
-        c = x+complex(0,1)*y
+        c = x+complex(0, 1)*y
         del x, y
         ix, iy = np.mgrid[0:self.width, 0:self.height]
         x = np.linspace(self.viewport['left_x'], self.viewport['right_x'], self.width)[ix]
         y = np.linspace(self.viewport['bottom_y'], self.viewport['top_y'], self.height)[iy]
-        z = x+complex(0,1)*y
+        z = x+complex(0, 1)*y
         del x, y
 
         img = np.zeros(c.shape, dtype=int)
@@ -51,10 +48,11 @@ class QuarticJulia(Julia):
         iy.shape = self.width*self.height
         c.shape = self.width*self.height
         z.shape = self.width*self.height
-        for i in xrange(self.precision):
-            if not len(z): break
+        for i in range(self.precision):
+            if not len(z):
+                break
 
-            #z <= z(n-1)^4 +c
+            # z <= z(n-1)^4 +c
             zn_minus1 = np.copy(z)
             np.multiply(z, z, z)
             np.multiply(z, zn_minus1, z)
@@ -62,12 +60,12 @@ class QuarticJulia(Julia):
             del zn_minus1
             np.add(z, c, z)
 
-            rem = abs(z)>self.breakout
-            img[ix[rem], iy[rem]] = i+1
-            rem = -rem
+            rem = abs(z) > self.breakout
+            img[ix[rem], iy[rem]] = i + 1
+            rem = ~rem
             z = z[rem]
             ix, iy = ix[rem], iy[rem]
             c = c[rem]
 
-        img[img==0] = self.max_iter
+        img[img == 0] = self.max_iter
         return img

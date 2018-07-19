@@ -36,6 +36,6 @@ class FractalLib:
                     try:
                         if os.path.isfile(file_path):
                             os.unlink(file_path)
-                    except Exception, e:
-                        print e
+                    except Exception as e:
+                        print(e)
             os.rmdir(directory)

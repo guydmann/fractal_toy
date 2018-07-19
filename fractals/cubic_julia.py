@@ -1,4 +1,4 @@
-from julia import Julia
+from fractals.julia import Julia
 import numpy as np
 
 
@@ -53,10 +53,10 @@ class CubicJulia(Julia):
         iy.shape = self.width*self.height
         c.shape = self.width*self.height
         z.shape = self.width*self.height
-        for i in xrange(self.precision):
+        for i in range(self.precision):
             if not len(z): break
 
-            #z <= z(n-1)^3 +c
+            # z <= z(n-1)^3 +c
             zn_minus1 = np.copy(z)
             np.multiply(z, z, z)
             np.multiply(z, zn_minus1, z)
@@ -65,7 +65,7 @@ class CubicJulia(Julia):
 
             rem = abs(z)>self.breakout
             img[ix[rem], iy[rem]] = i+1
-            rem = -rem
+            rem = ~rem
             z = z[rem]
             ix, iy = ix[rem], iy[rem]
             c = c[rem]

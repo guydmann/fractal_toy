@@ -1,7 +1,7 @@
 from math import floor
 
-class ColorLib:
 
+class ColorLib:
 
     @staticmethod
     def black_and_white(fractal_pixel_data, precision):
@@ -40,7 +40,7 @@ class ColorLib:
         return color
 
     @staticmethod
-    def rgba_cyclic(self, color_count, start_color, color_step_shift, fractal_pixel_data, precision):
+    def rgba_cyclic(color_count, start_color, color_step_shift, fractal_pixel_data, precision):
         """
             color_count: number of colors to rotate through
             start_color: color to start with {'red': red_value, 'green': green_value, 'blue': blue_value, 'alpha': alpha_value}
@@ -52,11 +52,11 @@ class ColorLib:
         if fractal_pixel_data['count'] < precision:
             color_count = color_count
             modcolor = fractal_pixel_data['count'] % color_count
-            R = start_color['red'] + ((modcolor*color_step_shift['red'])%255)
-            G = start_color['green'] + ((modcolor*color_step_shift['green'])%255)
-            B = start_color['blue'] + ((modcolor*color_step_shift['blue'])%255)
-            A = start_color['alpha'] + ((modcolor*color_step_shift['alpha'])%255)
-            color = (int(R), int(G), int(B), int(A))
+            r = start_color['red'] + ((modcolor*color_step_shift['red']) % 255)
+            g = start_color['green'] + ((modcolor*color_step_shift['green']) % 255)
+            b = start_color['blue'] + ((modcolor*color_step_shift['blue']) % 255)
+            a = start_color['alpha'] + ((modcolor*color_step_shift['alpha']) % 255)
+            color = (int(r), int(g), int(b), int(a))
         return color
 
     @staticmethod
@@ -79,12 +79,12 @@ class ColorLib:
         # We accept saturation and value arguments from 0 to 100 because that's
         # how Photoshop represents those values. Internally, however, the
         # saturation and value are calculated from a range of 0 to 1. We make
-        #That conversion here. \
+        # that conversion here.
         s /= 100
         v /= 100
 
         if s == 0:
-        #Achromatic (grey)
+            # Achromatic (grey)
             r = g = b = v
             return [round(r * 255), round(g * 255), round(b * 255)]
 
@@ -121,4 +121,4 @@ class ColorLib:
             g = p
             b = q
 
-        return (int(round(r * 255)), int(round(g * 255)), int(round(b * 255)))
+        return int(round(r * 255)), int(round(g * 255)), int(round(b * 255))

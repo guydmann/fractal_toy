@@ -1,7 +1,5 @@
-from iterative_fractal import IterativeFractal
+from fractals.iterative_fractal import IterativeFractal
 import numpy as np
-
-__author__ = 'guydmann'
 
 
 class CubicMandelbrot(IterativeFractal):
@@ -16,7 +14,7 @@ class CubicMandelbrot(IterativeFractal):
         y = cy
         x2 = x * x
         y2 = y * y
-        #z <= z(n-1)^3 +c
+        # z <= z(n-1)^3 +c
         count = 0
         for count in range(self.max_iter):
             if (x2 + y2) > self.breakout:
@@ -46,7 +44,7 @@ class CubicMandelbrot(IterativeFractal):
         iy.shape = self.width*self.height
         c.shape = self.width*self.height
         z = np.copy(c)
-        for i in xrange(self.precision):
+        for i in range(self.precision):
             if not len(z): break
 
             #z <= z(n-1)^3 +c
@@ -58,7 +56,7 @@ class CubicMandelbrot(IterativeFractal):
 
             rem = abs(z)>self.breakout
             img[ix[rem], iy[rem]] = i+1
-            rem = -rem
+            rem = ~rem
             z = z[rem]
             ix, iy = ix[rem], iy[rem]
             c = c[rem]

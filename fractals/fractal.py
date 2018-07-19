@@ -1,7 +1,6 @@
 from __future__ import division
 import datetime
-
-__author__ = 'guydmann'
+from os import mkdir, path
 
 
 class Fractal(object):
@@ -19,7 +18,7 @@ class Fractal(object):
     x_inc = None
     y_inc = None
     show_progress_bar = True
-    iterative_algorithm = None  #should be set to True or False
+    iterative_algorithm = None  # should be set to True or False
     filename = None
     directory = None
     fractal_name = "fractal"
@@ -56,12 +55,14 @@ class Fractal(object):
                     self.directory = "images/{}/".format(self.directory)
             else:
                 self.directory = "images/"
+            if not path.isdir("images"):
+                mkdir("images")
             self.set_filename("{}{}_{}_h{}_w{}_{}".format(self.directory,
                                                                  self.fractal_name,
                                                                  self.color_algorithm_name,
                                                                  self.height,
                                                                  self.width,
-                                                                 i.isoformat()))
+                                                                 i.isoformat().replace(":","")))
         self.preprocessed = True
         self.fractal_array = self.create_empty_fractal_array(self.width, self.height)
 

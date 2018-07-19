@@ -1,5 +1,5 @@
 from __future__ import division
-from color import Color
+from colors.color import Color
 
 
 class RGBACyclic(Color):
@@ -35,9 +35,9 @@ class RGBACyclic(Color):
         color = (0, 0, 0)
         if pixel_data < self.precision:
             modcolor = pixel_data % self.color_count
-            R = self.start_color['red'] + ((modcolor*self.color_step_shift['red'])%255)
-            G = self.start_color['green'] + ((modcolor*self.color_step_shift['green'])%255)
-            B = self.start_color['blue'] + ((modcolor*self.color_step_shift['blue'])%255)
-            A = self.start_color['alpha'] + ((modcolor*self.color_step_shift['alpha'])%255)
+            R = self.start_color['red'] + ((modcolor*self.color_step_shift['red']) % 255)
+            G = self.start_color['green'] + ((modcolor*self.color_step_shift['green']) % 255)
+            B = self.start_color['blue'] + ((modcolor*self.color_step_shift['blue']) % 255)
+            A = self.start_color['alpha'] + ((modcolor*self.color_step_shift['alpha']) % 255)
             color = (int(R), int(G), int(B), int(A))
         return color

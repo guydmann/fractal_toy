@@ -2,8 +2,6 @@ import datetime
 from fractal_lib import FractalLib
 from os import mkdir
 
-__author__ = 'guydmann'
-
 
 class Animation(object):
     fractal = None
@@ -11,6 +9,7 @@ class Animation(object):
     animation_name = None
     increments = None
     images = []
+    directory = ""
 
     def animate(self):
         pass
@@ -41,7 +40,7 @@ class Animation(object):
                                                                  self.fractal.color_algorithm_name,
                                                                  self.fractal.height,
                                                                  self.fractal.width,
-                                                                 i.isoformat()))
+                                                                 i.isoformat().replace(":","")))
 
         FractalLib.empty_dir_and_remove("{}".format(self.fractal.directory))
         mkdir("{}".format(self.fractal.directory))

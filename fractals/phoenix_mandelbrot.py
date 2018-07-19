@@ -1,5 +1,6 @@
-from iterative_fractal import IterativeFractal
+from fractals.iterative_fractal import IterativeFractal
 import numpy as np
+
 
 class PhoenixMandelbrot(IterativeFractal):
     fractal_name = "phoenic_mandelbrot"
@@ -45,8 +46,8 @@ class PhoenixMandelbrot(IterativeFractal):
         ix, iy = np.mgrid[0:self.width, 0:self.height]
         x = np.linspace(self.viewport['left_x'], self.viewport['right_x'], self.width)[ix]
         y = np.linspace(self.viewport['bottom_y'], self.viewport['top_y'], self.height)[iy]
-        c = x+complex(0,1)*y
-        x = x+complex(0,1)*0
+        c = x+complex(0, 1)*y
+        x = x+complex(0, 1)*0
         y = 0+complex(0, 1)*y
 
         img = np.zeros(c.shape, dtype=int)
@@ -57,8 +58,9 @@ class PhoenixMandelbrot(IterativeFractal):
         y.shape = shape
         c.shape = shape
         z = np.copy(c)
-        for i in xrange(self.precision):
-            if not len(z): break
+        for i in range(self.precision):
+            if not len(z):
+                break
 
             zn_minus_1 = z
             np.multiply(z, z, z)
@@ -67,12 +69,12 @@ class PhoenixMandelbrot(IterativeFractal):
             np.multiply(temp_c, zn_minus_1, temp_c)
             np.add(z, temp_c, z)
 
-            rem = abs(z)>self.breakout
-            img[ix[rem], iy[rem]] = i+1
-            rem = -rem
+            rem = abs(z) > self.breakout
+            img[ix[rem], iy[rem]] = i + 1
+            rem = ~rem
             z = z[rem]
             ix, iy = ix[rem], iy[rem]
             x, y = x[rem], y[rem]
             c = c[rem]
-        img[img==0] = self.max_iter
+        img[img == 0] = self.max_iter
         return img

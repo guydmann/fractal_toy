@@ -1,8 +1,8 @@
 from __future__ import division
 from progressbar import ProgressBar
-from images2gif import writeGif
+from imageio import mimsave
 from PIL import Image
-from animation import Animation
+from animations.animation import Animation
 import math
 
 __author__ = 'guydmann'
@@ -15,7 +15,7 @@ class SecondHueRotation(Animation):
         self.preprocess()
 
         calc_pbar = ProgressBar(maxval=360)
-        print "Creating Fractal Images"
+        print("Creating Fractal Images")
         calc_pbar.start()
         results = []
         h_start = self.fractal.color_algorithm.start_degree
@@ -36,4 +36,4 @@ class SecondHueRotation(Animation):
         for image_file in results:
             self.images.append(Image.open(image_file).convert('RGBA'))
 
-        writeGif("{}.gif".format(self.filename), self.images)
+        mimsave("{}.gif".format(self.filename), self.images)

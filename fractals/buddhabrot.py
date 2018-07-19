@@ -1,8 +1,6 @@
 from __future__ import division
 from math import floor
-from traversal_fractal import TraversalFractal
-
-__author__ = 'guydmann'
+from fractals.traversal_fractal import TraversalFractal
 
 
 class Buddhabrot(TraversalFractal):
@@ -19,7 +17,7 @@ class Buddhabrot(TraversalFractal):
         y = cy
         x2 = x * x
         y2 = y * y
-        #z <= z(n-1)^2 +c
+        # z <= z(n-1)^2 +c
         for count in range(self.max_iter):
             if (x2 + y2) > self.breakout:
                 break

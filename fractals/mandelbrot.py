@@ -1,5 +1,5 @@
 import numpy as np
-from iterative_fractal import IterativeFractal
+from fractals.iterative_fractal import IterativeFractal
 
 
 class Mandelbrot(IterativeFractal):
@@ -39,7 +39,7 @@ class Mandelbrot(IterativeFractal):
         iy.shape = self.width*self.height
         c.shape = self.width*self.height
         z = np.copy(c)
-        for i in xrange(self.precision):
+        for i in range(self.precision):
             if not len(z): break
 
             # z = z^2 + c
@@ -48,7 +48,7 @@ class Mandelbrot(IterativeFractal):
 
             rem = abs(z)>self.breakout
             img[ix[rem], iy[rem]] = i+1
-            rem = -rem
+            rem = ~rem
             z = z[rem]
             ix, iy = ix[rem], iy[rem]
             c = c[rem]

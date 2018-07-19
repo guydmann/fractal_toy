@@ -15,7 +15,7 @@ from animations.random_walk import RandomWalk
 
 def setup_fractal(args):
     class_name = FractalLib.fractal_mapping[args.fractal_algorithm]
-    module = __import__("fractals.%s" % (args.fractal_algorithm), fromlist=[class_name])
+    module = __import__("fractals.{alg}".format(alg=args.fractal_algorithm), fromlist=[class_name])
     class_ = getattr(module, class_name)
     instance = class_()
     return instance
@@ -45,7 +45,8 @@ def setup_fractal_color_scheme(fractal, args):
         if args.color_count:
             color.set_color_count(args.color_count)
 
-        fractal.set_color_algorithm_name("{}-{}-{}".format(args.color_algorithm, color.start_degree, color.color_step_shift))
+        fractal.set_color_algorithm_name("{}-{}-{}".format(
+            args.color_algorithm, color.start_degree, color.color_step_shift))
     fractal.set_color_algorithm(color)
     return fractal
 
@@ -106,7 +107,7 @@ def main(args):
     if args.precision is not None:
         fractal.set_precision(args.precision)
 
-    #needs to be done after the setting of precision so the precision can be used in color calculations
+    # needs to be done after the setting of precision so the precision can be used in color calculations
     fractal = setup_fractal_color_scheme(fractal, args)
 
     if args.fractal_animation is not None:
@@ -120,11 +121,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(add_help=True)
     parser.add_argument('-f', '--filename', type=str, help='do not include file extension')
     parser.add_argument('-a', '--fractal_algorithm', default="mandelbrot", type=str,
-                        choices=['mandelbrot', 'julia','burning_ship', 'star', 'newton', 'phoenix_mandelbrot',
+                        choices=['mandelbrot', 'julia', 'burning_ship', 'star', 'newton', 'phoenix_mandelbrot',
                                  'phoenix_julia', 'cubic_mandelbrot', 'quartic_mandelbrot', 'cubic_julia',
                                  'experimental_cubic_julia', 'quartic_julia', 'buddhabrot', 'buddhabrot_julia'])
     parser.add_argument('-c', '--color_algorithm', default="simple", type=str,
-                        choices=['simple', 'black_and_white','hue_range', 'hue_cyclic'])
+                        choices=['simple', 'black_and_white', 'hue_range', 'hue_cyclic'])
     parser.add_argument('-W', '--width', type=int)
     parser.add_argument('-H', '--height', type=int)
     parser.add_argument('-vl', '--viewport_left', type=float,
@@ -149,15 +150,15 @@ if __name__ == "__main__":
     parser.add_argument('-cc', '--color_count', type=int,
                         help='use to define the number of colors to cycle through in the cyclic color algorithms')
 
-    #animation variables
+    # animation variables
     parser.add_argument('-A', '--fractal_animation',  type=str, help='int to select animation',
                         choices=['first_hue_rotation', 'second_hue_rotation', 'hue_cycle'])
     parser.add_argument('-i', '--increments', default=40, type=int)
-    #parser.add_argument('-cl', '--constant_left', type=float)
-    #parser.add_argument('-cr', '--constant_right', type=float)
-    #parser.add_argument('-ct', '--constant_top', type=float)
-    #parser.add_argument('-cb', '--constant_bottom', type=float)
-    #parser.add_argument('-t', '--traversal', type=str,
+    # parser.add_argument('-cl', '--constant_left', type=float)
+    # parser.add_argument('-cr', '--constant_right', type=float)
+    # parser.add_argument('-ct', '--constant_top', type=float)
+    # parser.add_argument('-cb', '--constant_bottom', type=float)
+    # parser.add_argument('-t', '--traversal', type=str,
     #                    choices=['diagonal', 'spiral'])
 
     arguments = parser.parse_args()

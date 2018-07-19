@@ -1,6 +1,4 @@
-from julia import Julia
-
-__author__ = 'guydmann'
+from fractals.julia import Julia
 
 
 class ExperimentalCubicJulia(Julia):
@@ -19,7 +17,7 @@ class ExperimentalCubicJulia(Julia):
 
         x2 = x * x
         y2 = y * y
-        #z <= z(n-1)^3 +c
+        # z <= z(n-1)^3 +c
         count = 0
         for count in range(self.max_iter):
             if (x2 + y2) > self.breakout:
@@ -46,7 +44,7 @@ class ExperimentalCubicJulia(Julia):
 
         x2 = x * x
         y2 = y * y
-        #z <= z(n-1)^3 +c
+        # z <= z(n-1)^3 +c
         count = 0
         for count in range(self.max_iter):
             if (x2 + y2) > self.breakout:
@@ -61,8 +59,8 @@ class ExperimentalCubicJulia(Julia):
             x += self.cr
             y += self.ci
 
-            dx2 = x * x
-            dy2 = y * y
+            x2 = x * x
+            y2 = y * y
 
         count2 = count
         if count1 == count2:

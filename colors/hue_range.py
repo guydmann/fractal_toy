@@ -1,5 +1,5 @@
 from __future__ import division
-from color import Color
+from colors.color import Color
 
 
 class HueRange(Color):
@@ -25,8 +25,8 @@ class HueRange(Color):
         self.verify_data()
 
         color = (0, 0, 0)
-        if pixel_data['count'] < self.precision:
-            h = round((pixel_data['count']/self.precision)*(self.end_degree-self.start_degree))+self.start_degree
+        if pixel_data < self.precision:
+            h = round((pixel_data / self.precision) * (self.end_degree - self.start_degree)) \
+                + self.start_degree
             color = self.hsv_to_rgb(h, 100, 100)
         return color
-

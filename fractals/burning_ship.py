@@ -1,6 +1,4 @@
-from iterative_fractal import IterativeFractal
-
-__author__ = 'guydmann'
+from fractals.iterative_fractal import IterativeFractal
 
 
 class BurningShip(IterativeFractal):

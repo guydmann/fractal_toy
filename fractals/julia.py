@@ -1,7 +1,5 @@
-from iterative_fractal import IterativeFractal
+from fractals.iterative_fractal import IterativeFractal
 import numpy as np
-
-__author__ = 'guydmann'
 
 
 class Julia(IterativeFractal):
@@ -43,15 +41,15 @@ class Julia(IterativeFractal):
         iy.shape = self.width*self.height
         c.shape = self.width*self.height
         z.shape = self.width*self.height
-        for i in xrange(self.precision):
+        for i in range(self.precision):
             if not len(z): break
 
             np.multiply(z, z, z)
             np.add(z, c, z)
 
             rem = abs(z)>self.breakout
-            img[ix[rem], iy[rem]] = i+1
-            rem = -rem
+            img[ix[rem], iy[rem]] = i + 1
+            rem = ~rem
             z = z[rem]
             ix, iy = ix[rem], iy[rem]
             c = c[rem]

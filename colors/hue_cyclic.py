@@ -1,5 +1,5 @@
 from __future__ import division
-from color import Color
+from colors.color import Color
 
 
 class HueCyclic(Color):
@@ -35,6 +35,6 @@ class HueCyclic(Color):
         color = (0, 0, 0)
         if pixel_data < self.precision:
             modcolor = pixel_data % self.color_count
-            h = round(modcolor*(self.color_step_shift))+self.start_degree
-            color = self.hsv_to_rgb(h%360, 100, 100)
+            h = round(modcolor * self.color_step_shift) + self.start_degree
+            color = self.hsv_to_rgb(h % 360, 100, 100)
         return color

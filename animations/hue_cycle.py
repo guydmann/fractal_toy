@@ -1,8 +1,8 @@
 from __future__ import division
-from progressbar import ProgressBar
-from images2gif import writeGif
+from imageio import mimsave
 from PIL import Image
-from animation import Animation
+from progressbar import ProgressBar
+from animations.animation import Animation
 
 __author__ = 'guydmann'
 
@@ -13,7 +13,8 @@ class HueCycle(Animation):
     def animate(self):
         self.preprocess()
 
-        print "Creating Fractal Images"
+        calc_pbar = ProgressBar(maxval=360)
+        print("Creating Fractal Images")
         results = []
         for k in range(self.increments):
             self.fractal.set_filename("{}{}_{}_{}_{}".format(self.fractal.directory,
@@ -26,7 +27,9 @@ class HueCycle(Animation):
             self.fractal.color_algorithm.\
                 set_start_degree(self.fractal.color_algorithm.start_degree + \
                                  self.fractal.color_algorithm.color_step_shift)
+            calc_pbar.update(k)
+        calc_pbar.finish()
         for image_file in results:
             self.images.append(Image.open(image_file).convert('RGBA'))
 
-        writeGif("{}.gif".format(self.filename), self.images)
+        mimsave("{}.gif".format(self.filename), self.images)
