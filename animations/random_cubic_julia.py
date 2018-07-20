@@ -70,8 +70,8 @@ class RandomCubicJulia(Animation):
                                                              k))
             results.append(self.render_fractal())
             calc_pbar.update(k)
-            self.fractal.set_real_constant(x - (k*((x/5)/self.increments)))
-            self.fractal.set_imaginary_constant(y - (k*((y/5)/self.increments)))
+            self.fractal.set_real_constant(x - (k*((x/30)/self.increments)))
+            self.fractal.set_imaginary_constant(y - (k*((y/30)/self.increments)))
 
         for k in range(self.increments):
 
@@ -80,8 +80,8 @@ class RandomCubicJulia(Animation):
                                                              k))
             results.append(self.render_fractal())
             calc_pbar.update(self.increments+k)
-            self.fractal.set_real_constant(x + (k*((x/5)/self.increments)) - (x/5))
-            self.fractal.set_imaginary_constant(y + (k*((y/5)/self.increments)) - (y/5))
+            self.fractal.set_real_constant(x + (k*((x/30)/self.increments)) - (x/30))
+            self.fractal.set_imaginary_constant(y + (k*((y/30)/self.increments)) - (y/30))
 
         calc_pbar.finish()
 
