@@ -35,9 +35,7 @@ class Mandelbrot(IterativeFractal):
         c = x+complex(0,1)*y
         del x, y
         img = np.zeros(c.shape, dtype=int)
-        ix.shape = self.width*self.height
-        iy.shape = self.width*self.height
-        c.shape = self.width*self.height
+        c.shape = iy.shape = ix.shape = self.width*self.height
         z = np.copy(c)
         for i in range(self.precision):
             if not len(z): break

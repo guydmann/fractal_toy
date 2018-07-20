@@ -41,10 +41,7 @@ class Julia(IterativeFractal):
         del x, y
 
         img = np.zeros(c.shape, dtype=int)
-        ix.shape = self.width * self.height
-        iy.shape = self.width * self.height
-        c.shape = self.width * self.height
-        z.shape = self.width * self.height
+        z.shape = c.shape = iy.shape = ix.shape = self.width * self.height
         for i in range(self.precision):
             if not len(z):
                 break

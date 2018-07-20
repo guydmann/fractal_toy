@@ -28,7 +28,13 @@ python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.13 -c hue_cyc
 python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.135 -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.25 -vb -1.25 -A hue_cycle -i 30
 
 
-python generate_fractal_image.py -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -A random_walk -i 50
+python generate_fractal_image.py -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -A random_julia -i 50
+
+#great color
+python generate_fractal_image.py -c hue_cyclic -hs 155 -hss 36 -cc 30 -W 800 -H 800 -A random_julia -i 50
+python generate_fractal_image.py -c hue_cyclic -hs 155 -hss 36 -cc 30 -W 800 -H 800 -A random_cubic_julia -i 50
+python generate_fractal_image.py -c hue_cyclic -hs 155 -hss 36 -cc 30 -W 800 -H 800 -A random_phoenix_julia -i 50
+python generate_fractal_image.py -c hue_cyclic -hs 203 -hss 43 -cc 30 -W 400 -H 400 -A random_quartic_julia -i 50
 
 
 notes on possible schema file implementation in the future

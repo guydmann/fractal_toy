@@ -10,8 +10,10 @@ from colors.hue_cyclic import HueCyclic
 from animations.first_hue_rotation import FirstHueRotation
 from animations.second_hue_rotation import SecondHueRotation
 from animations.hue_cycle import HueCycle
-from animations.random_walk import RandomWalk
-
+from animations.random_julia import RandomJulia
+from animations.random_cubic_julia import RandomCubicJulia
+from animations.random_phoenix_julia import RandomPhoenixJulia
+from animations.random_quartic_julia import RandomQuarticJulia
 
 def setup_fractal(args):
     class_name = FractalLib.fractal_mapping[args.fractal_algorithm]
@@ -78,8 +80,14 @@ def setup_fractal_animation(fractal, args):
         if args.color_algorithm != "hue_cyclic":
             raise Exception('only hue_cyclic should be used for this animation')
         animation = HueCycle()
-    elif args.fractal_animation == "random_walk":
-        animation = RandomWalk()
+    elif args.fractal_animation == "random_julia":
+        animation = RandomJulia()
+    elif args.fractal_animation == "random_cubic_julia":
+        animation = RandomCubicJulia()
+    elif args.fractal_animation == "random_phoenix_julia":
+        animation = RandomPhoenixJulia()
+    elif args.fractal_animation == "random_quartic_julia":
+        animation = RandomQuarticJulia()
     else:
         fractal.set_show_progress_bar(False)
 
@@ -152,7 +160,8 @@ if __name__ == "__main__":
 
     # animation variables
     parser.add_argument('-A', '--fractal_animation',  type=str, help='int to select animation',
-                        choices=['first_hue_rotation', 'second_hue_rotation', 'hue_cycle', 'random_walk'])
+                        choices=['first_hue_rotation', 'second_hue_rotation', 'hue_cycle', 'random_julia',
+                                 'random_cubic_julia', 'random_phoenix_julia', 'random_quartic_julia'])
     parser.add_argument('-i', '--increments', default=40, type=int)
     # parser.add_argument('-cl', '--constant_left', type=float)
     # parser.add_argument('-cr', '--constant_right', type=float)
