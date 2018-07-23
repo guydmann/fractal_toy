@@ -14,6 +14,7 @@ from animations.random_julia import RandomJulia
 from animations.random_cubic_julia import RandomCubicJulia
 from animations.random_phoenix_julia import RandomPhoenixJulia
 from animations.random_quartic_julia import RandomQuarticJulia
+from animations.random_walk_julia import RandomWalkJulia
 
 def setup_fractal(args):
     class_name = FractalLib.fractal_mapping[args.fractal_algorithm]
@@ -88,6 +89,8 @@ def setup_fractal_animation(fractal, args):
         animation = RandomPhoenixJulia()
     elif args.fractal_animation == "random_quartic_julia":
         animation = RandomQuarticJulia()
+    elif args.fractal_animation == "random_walk_julia":
+        animation = RandomWalkJulia()
     else:
         fractal.set_show_progress_bar(False)
 
@@ -161,7 +164,8 @@ if __name__ == "__main__":
     # animation variables
     parser.add_argument('-A', '--fractal_animation',  type=str, help='int to select animation',
                         choices=['first_hue_rotation', 'second_hue_rotation', 'hue_cycle', 'random_julia',
-                                 'random_cubic_julia', 'random_phoenix_julia', 'random_quartic_julia'])
+                                 'random_cubic_julia', 'random_phoenix_julia', 'random_quartic_julia',
+                                 'random_walk_julia'])
     parser.add_argument('-i', '--increments', default=40, type=int)
     # parser.add_argument('-cl', '--constant_left', type=float)
     # parser.add_argument('-cr', '--constant_right', type=float)

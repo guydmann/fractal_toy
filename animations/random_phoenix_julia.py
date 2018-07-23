@@ -28,7 +28,7 @@ class RandomPhoenixJulia(Animation):
         self.fractal.set_height(fractal_backup.height)
         self.fractal.set_precision(fractal_backup.precision)
 
-        calc_pbar = ProgressBar(maxval=self.increments*2)
+        calc_pbar = ProgressBar(maxval=self.increments)
         print("Generating Cubic Mandelbrot Set")
         self.fractal.set_bypass_image_generation(True)
         self.render_fractal()
@@ -73,19 +73,11 @@ class RandomPhoenixJulia(Animation):
             self.fractal.set_real_constant(x - (k*((x/60)/self.increments)))
             self.fractal.set_imaginary_constant(y - (k*((y/60)/self.increments)))
 
-        for k in range(self.increments):
-
-            self.fractal.set_filename("{}{}_{}_backward".format(self.fractal.directory,
-                                                             self.animation_name,
-                                                             k))
-            results.append(self.render_fractal())
-            calc_pbar.update(self.increments+k)
-            self.fractal.set_real_constant(x + (k*((x/60)/self.increments)) - (x/60))
-            self.fractal.set_imaginary_constant(y + (k*((y/60)/self.increments)) - (y/60))
-
         calc_pbar.finish()
 
         for image_file in results:
+            self.images.append(imread(image_file))
+        for image_file in reversed(results):
             self.images.append(imread(image_file))
 
         mimsave("{}.gif".format(self.filename), self.images)

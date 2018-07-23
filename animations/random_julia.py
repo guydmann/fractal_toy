@@ -18,7 +18,7 @@ class RandomJulia(Animation):
 
         fractal_backup = copy.deepcopy(self.fractal)
 
-        calc_pbar = ProgressBar(maxval=self.increments*2)
+        calc_pbar = ProgressBar(maxval=self.increments)
         print("Generating Mandelbrot Set")
         self.fractal.set_bypass_image_generation(True)
         self.render_fractal()
@@ -62,19 +62,11 @@ class RandomJulia(Animation):
             self.fractal.set_real_constant(x - (k*((x/30)/self.increments)))
             self.fractal.set_imaginary_constant(y - (k*((y/30)/self.increments)))
 
-        for k in range(self.increments):
-
-            self.fractal.set_filename("{}{}_{}_backward".format(self.fractal.directory,
-                                                             self.animation_name,
-                                                             k))
-            results.append(self.render_fractal())
-            calc_pbar.update(self.increments+k)
-            self.fractal.set_real_constant(x + (k*((x/30)/self.increments)) - (x/30))
-            self.fractal.set_imaginary_constant(y + (k*((y/30)/self.increments)) - (y/30))
-
         calc_pbar.finish()
 
         for image_file in results:
+            self.images.append(imread(image_file))
+        for image_file in reversed(results):
             self.images.append(imread(image_file))
 
         mimsave("{}.gif".format(self.filename), self.images)
