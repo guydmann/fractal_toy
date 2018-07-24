@@ -77,7 +77,11 @@ class RandomWalkJulia(Animation):
 
         for image_file in results:
             self.images.append(imread(image_file))
+            self.images.append(imread(image_file))
+            self.images.append(imread(image_file))
         for image_file in reversed(results):
+            self.images.append(imread(image_file))
+            self.images.append(imread(image_file))
             self.images.append(imread(image_file))
 
         mimsave("{}.gif".format(self.filename), self.images)
