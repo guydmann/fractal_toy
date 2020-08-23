@@ -14,9 +14,7 @@ __author__ = 'guydmann'
 class RandomQuarticJulia(Animation):
     animation_name = "random_quartic_julia"
 
-    def animate(self):
-        self.preprocess()
-
+    def generate_images(self):
         fractal_backup = copy.deepcopy(self.fractal)
 
         self.fractal = CubicMandelbrot()
@@ -61,10 +59,7 @@ class RandomQuarticJulia(Animation):
         self.fractal.set_imaginary_constant(y)
 
         for k in range(self.increments):
-
-            self.fractal.set_filename("{}{}_{}_forward".format(self.fractal.directory,
-                                                             self.animation_name,
-                                                             k))
+            self.fractal.set_filename("{}{}_{}_forward".format(self.fractal.directory, self.animation_name, k))
             results.append(self.render_fractal())
             calc_pbar.update(k)
             self.fractal.set_real_constant(x - (k*((x/60)/self.increments)))
@@ -72,9 +67,9 @@ class RandomQuarticJulia(Animation):
 
         calc_pbar.finish()
 
+        output = []
         for image_file in results:
-            self.images.append(imread(image_file))
+            output.append(image_file)
         for image_file in reversed(results):
-            self.images.append(imread(image_file))
-
-        mimsave("{}.gif".format(self.filename), self.images)
+            output.append(image_file)
+        return output

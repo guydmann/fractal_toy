@@ -14,9 +14,7 @@ __author__ = 'guydmann'
 class RandomCubicJulia(Animation):
     animation_name = "random_cubic_julia"
 
-    def animate(self):
-        self.preprocess()
-
+    def generate_images(self):
         fractal_backup = copy.deepcopy(self.fractal)
 
         self.fractal = CubicMandelbrot()
@@ -75,9 +73,9 @@ class RandomCubicJulia(Animation):
 
         calc_pbar.finish()
 
+        output = []
         for image_file in results:
-            self.images.append(imread(image_file))
+            output.append(image_file)
         for image_file in reversed(results):
-            self.images.append(imread(image_file))
-
-        mimsave("{}.gif".format(self.filename), self.images)
+            output.append(image_file)
+        return output

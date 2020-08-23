@@ -11,13 +11,15 @@ class IterativeFractal(Fractal):
             self.preprocess()
 
         if not self.fractal_data_generated:
-            print("Calculating Fractal")
+            if self.verbose:
+                print("Calculating Fractal")
             self.fractal_array = self.dwell()
             self.set_fractal_data_generated(True)
 
         if not self.bypass_image_generation:
             img = Image.new('RGBA', (self.width, self.height))
-            print("Coloring Fractal")
+            if self.verbose:
+                print("Coloring Fractal")
             uniques, indices = np.unique(self.fractal_array, return_inverse=True)
             precomputed_colors = dict([(unique, self.color(unique)) for unique in uniques])
             for cx in range(self.width):

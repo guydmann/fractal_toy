@@ -4,6 +4,7 @@ from os import mkdir, path
 
 
 class Fractal(object):
+    verbose = False
     width = 200
     height = 200
     precision = 300
@@ -39,7 +40,6 @@ class Fractal(object):
             for cy in range(self.height):
                 self.fractal_array[cx][cy] = \
                     self.dwell_cell((cx*self.x_inc)+self.viewport['left_x'], self.viewport['top_y']-(cy*self.y_inc))
-
 
     def preprocess(self):
         self.verify_data_preprocessing()
@@ -187,6 +187,9 @@ class Fractal(object):
 
     def set_show_progress_bar(self, show):
         self.show_progress_bar = show
+
+    def set_verbopse(self, verbose):
+        self.verbose = verbose
 
     def create_empty_fractal_array(self, num_rows, num_cols):
         """

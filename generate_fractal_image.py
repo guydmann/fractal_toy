@@ -16,6 +16,7 @@ from animations.random_phoenix_julia import RandomPhoenixJulia
 from animations.random_quartic_julia import RandomQuarticJulia
 from animations.random_walk_julia import RandomWalkJulia
 
+
 def setup_fractal(args):
     class_name = FractalLib.fractal_mapping[args.fractal_algorithm]
     module = __import__("fractals.{alg}".format(alg=args.fractal_algorithm), fromlist=[class_name])
@@ -68,19 +69,23 @@ def setup_fractal_viewport(fractal, args):
 
 def setup_fractal_animation(fractal, args):
     animation = None
+    if args.fractal_animation == "first_hue_rotation" or args.fractal_animation == "second_hue_rotation":
+        if args.fractal_animation == "first_hue_rotation":
+            if args.color_algorithm != "hue_range":
+                raise Exception('only hue_range should be used for this animation')
+            animation = FirstHueRotation()
 
-    if args.fractal_animation == "first_hue_rotation":
-        if args.color_algorithm != "hue_range":
-            raise Exception('only hue_range should be used for this animation')
-        animation = FirstHueRotation()
-    elif args.fractal_animation == "second_hue_rotation":
-        if args.color_algorithm != "hue_range":
-            raise Exception('only hue_range should be used for this animation')
-        animation = SecondHueRotation()
+        elif args.fractal_animation == "second_hue_rotation":
+            if args.color_algorithm != "hue_range":
+                raise Exception('only hue_range should be used for this animation')
+            animation = SecondHueRotation()
+        if args.color_multiplier:
+            animation.set_color_multiplier(args.color_multiplier)
     elif args.fractal_animation == "hue_cycle":
         if args.color_algorithm != "hue_cyclic":
             raise Exception('only hue_cyclic should be used for this animation')
         animation = HueCycle()
+
     elif args.fractal_animation == "random_julia":
         animation = RandomJulia()
     elif args.fractal_animation == "random_cubic_julia":
@@ -96,6 +101,12 @@ def setup_fractal_animation(fractal, args):
 
     if args.increments:
         animation.set_increments(args.increments)
+
+    if args.frames_per_second:
+        animation.set_frames_per_second(args.frames_per_second)
+
+    if args.file_type:
+        animation.set_file_type(args.file_type)
 
     animation.set_fractal(fractal)
     return animation
@@ -166,7 +177,14 @@ if __name__ == "__main__":
                         choices=['first_hue_rotation', 'second_hue_rotation', 'hue_cycle', 'random_julia',
                                  'random_cubic_julia', 'random_phoenix_julia', 'random_quartic_julia',
                                  'random_walk_julia'])
-    parser.add_argument('-i', '--increments', default=40, type=int)
+    parser.add_argument('-i', '--increments', default=40, type=int,
+                        help='number of increments in the animation, this m ay end up being doubled in looping animations')
+    parser.add_argument('-cm', '--color_multiplier', default=2, type=float,
+                        help='the number used as the multiplier for color rotations')
+    parser.add_argument('-ft', '--file_type', default='gif', type=str, help="the file type of the animation output",
+                        choices=['gif', 'mp4'])
+    parser.add_argument('-fps', '--frames_per_second', default=30, type=int,
+                        help="frames per second for video output, defaults to 30")
     # parser.add_argument('-cl', '--constant_left', type=float)
     # parser.add_argument('-cr', '--constant_right', type=float)
     # parser.add_argument('-ct', '--constant_top', type=float)

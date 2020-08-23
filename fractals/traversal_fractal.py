@@ -19,7 +19,8 @@ class TraversalFractal(Fractal):
         if not self.fractal_data_generated:
             if self.show_progress_bar:
                 calc_cols_pbar.start()
-            print("Calculating Fractal")
+            if self.verbose:
+                print("Calculating Fractal")
             for cx in range(self.width):
                 for cy in range(self.height):
                     self.dwell_cell((cx*self.x_inc)+self.viewport['left_x'], self.viewport['top_y']-(cy*self.y_inc))
@@ -33,7 +34,8 @@ class TraversalFractal(Fractal):
             img = Image.new('RGBA', (self.width, self.height))
             if self.show_progress_bar:
                 color_pbar.start()
-            print("Coloring Fractal")
+            if self.verbose:
+                print("Coloring Fractal")
             for cx in range(self.width):
                 for cy in range(self.height):
                     img.putpixel((cx, cy), self.color(self.fractal_array[cx][cy]))

@@ -1,5 +1,11 @@
 notes: phoenix algorithm is wrong, to correct check http://usefuljs.net/fractals/docs/mandelvariants.html for correct algorithm
 
+python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 1080 -H 920 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A first_hue_rotation -i 200 -cr -0.844 -ci 0.2 -ft mp4 -fps 20
+python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 1080 -H 920 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A second_hue_rotation -i 1800 -cr -0.844 -ci 0.2 -ft mp4 -fps 30 -cm 1.37
+ python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 800 -H 800 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A second_hue_rotation -i 450 -cr -0.844 -ci 0.2 -ft mp4 -fps 15 -cm 6
+
+
+
 test runs:
 python generate_fractal_image.py -a buddhabrot -c hue_range -hs 300 -he 40 -W 400 -H 300 -vl -2.0 -vr 1.0 -A second_hue_rotation
 python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 400 -H 300 -vl -2.0 -vr 2.0 -A first_hue_rotation -i 50 -cr -0.844 -ci 0.2
@@ -32,6 +38,11 @@ python generate_fractal_image.py -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 80
 
 #great color
 python generate_fractal_image.py -c hue_cyclic -hs 155 -hss 36 -cc 30 -W 800 -H 800 -A random_julia -i 50
+
+
+python generate_fractal_image.py -c hue_cyclic -hs 155 -hss 36 -cc 30 -W 800 -H 800 -A random_walk_julia -i 50
+
+
 python generate_fractal_image.py -c hue_cyclic -hs 155 -hss 36 -cc 30 -W 800 -H 800 -A random_cubic_julia -i 50
 python generate_fractal_image.py -c hue_cyclic -hs 155 -hss 36 -cc 30 -W 800 -H 800 -A random_phoenix_julia -i 50
 python generate_fractal_image.py -c hue_cyclic -hs 203 -hss 43 -cc 30 -W 400 -H 400 -A random_quartic_julia -i 50

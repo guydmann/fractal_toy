@@ -13,9 +13,7 @@ __author__ = 'guydmann'
 class RandomJulia(Animation):
     animation_name = "random_julia"
 
-    def animate(self):
-        self.preprocess()
-
+    def generate_images(self):
         fractal_backup = copy.deepcopy(self.fractal)
 
         calc_pbar = ProgressBar(maxval=self.increments)
@@ -33,8 +31,6 @@ class RandomJulia(Animation):
 
         x = np.linspace(self.fractal.viewport['left_x'], self.fractal.viewport['right_x'], self.fractal.width)[random_x]
         y = np.linspace(self.fractal.viewport['bottom_y'], self.fractal.viewport['top_y'], self.fractal.height)[random_y]
-
-
 
         print("Creating Fractal Images")
         calc_pbar.start()
@@ -64,9 +60,9 @@ class RandomJulia(Animation):
 
         calc_pbar.finish()
 
+        output = []
         for image_file in results:
-            self.images.append(imread(image_file))
+            output.append(image_file)
         for image_file in reversed(results):
-            self.images.append(imread(image_file))
-
-        mimsave("{}.gif".format(self.filename), self.images)
+            output.append(image_file)
+        return output
