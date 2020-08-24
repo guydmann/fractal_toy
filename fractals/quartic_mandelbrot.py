@@ -6,9 +6,6 @@ class QuarticMandelbrot(IterativeFractal):
     fractal_name = "quartic_mandelbrot"
     breakout = 128
 
-    def __init__(self):
-        super(IterativeFractal, self).__init__()
-
     def dwell_cell(self, cx, cy):
         x = cx
         y = cy

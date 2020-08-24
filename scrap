@@ -1,10 +1,24 @@
 notes: phoenix algorithm is wrong, to correct check http://usefuljs.net/fractals/docs/mandelvariants.html for correct algorithm
 
-python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 1080 -H 920 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A first_hue_rotation -i 200 -cr -0.844 -ci 0.2 -ft mp4 -fps 20
-python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 1080 -H 920 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A second_hue_rotation -i 1800 -cr -0.844 -ci 0.2 -ft mp4 -fps 30 -cm 1.37
- python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 800 -H 800 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A second_hue_rotation -i 450 -cr -0.844 -ci 0.2 -ft mp4 -fps 15 -cm 6
 
 
+python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 183 -W 800 -H 800 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A second_hue_rotation -i 60 -cr -0.844 -ci 0.2 -ft avi -fps 6 -cm 6
+# tight color rotation
+python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 183 -W 800 -H 800 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A second_hue_rotation -i 100 -cr -0.844 -ci 0.2 -ft avi -fps 20 -cm 3
+# seizure
+python generate_fractal_image.py -a julia -c hue_cyclic -hs 0 -hss 30 -cc 10 -W 800 -H 800 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A hue_cycle -i 36 -cr -0.844 -ci 0.2 -ft avi -fps 20
+#80s
+python generate_fractal_image.py -a star -c hue_cyclic -hs 0 -hss 36 -cc 10 -W 800 -H 800 -vl -2 -vr 2 -vt 2 -vb -2 -A hue_cycle -i 100 -ft avi -fps 10
+# tunnel vision
+python generate_fractal_image.py -a star -c hue_cyclic -hs 37 -hss 13 -cc 12 -W 800 -H 800 -vl -2 -vr 2 -vt 2 -vb -2 -A hue_cycle -i 100 -ft avi -fps 10
+
+python generate_fractal_image.py -a burning_ship -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -1.82 -vr -1.55 -vt -.08 -vb .01 -A hue_cycle -i 30 -ft avi -fps 10
+
+python generate_fractal_image.py -a newton -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl -5 -vr 5 -vt 5 -vb -5 -A hue_cycle -i 100 -ft avi -fps 10
+
+python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 1080 -H 920 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A first_hue_rotation -i 200 -cr -0.844 -ci 0.2 -ft avi -fps 20
+python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 1080 -H 920 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A second_hue_rotation -i 1800 -cr -0.844 -ci 0.2 -ft avi -fps 30 -cm 1.37
+python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 240 -W 800 -H 800 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A second_hue_rotation -i 450 -cr -0.844 -ci 0.2 -ft avi -fps 15 -cm 6
 
 test runs:
 python generate_fractal_image.py -a buddhabrot -c hue_range -hs 300 -he 40 -W 400 -H 300 -vl -2.0 -vr 1.0 -A second_hue_rotation

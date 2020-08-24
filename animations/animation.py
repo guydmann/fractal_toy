@@ -32,7 +32,7 @@ class Animation(object):
                 images.append(imread(image_file))
             output_filename = "{}.gif".format(self.filename)
             mimsave(output_filename, images)
-        elif self.file_type == "mp4":
+        elif self.file_type == "avi":
 
             frame = cv2.imread(image_files[0])
             output_filename = "{}.avi".format(self.filename)

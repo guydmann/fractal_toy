@@ -20,6 +20,7 @@ class IterativeFractal(Fractal):
             img = Image.new('RGBA', (self.width, self.height))
             if self.verbose:
                 print("Coloring Fractal")
+
             uniques, indices = np.unique(self.fractal_array, return_inverse=True)
             precomputed_colors = dict([(unique, self.color(unique)) for unique in uniques])
             for cx in range(self.width):

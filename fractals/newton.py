@@ -6,9 +6,6 @@ class Newton(IterativeFractal):
     fractal_name = "newton"
     breakout = 0.00001
 
-    def __init__(self):
-        super(IterativeFractal, self).__init__()
-
     def dwell_cell(self, cx, cy):
         absv2 = 1.0
         x = cx
@@ -28,7 +25,7 @@ class Newton(IterativeFractal):
                 x = (2 * oldx * r4 + x2 - y2) / (3.0*r4)
                 y = 2 * oldy * (r4-oldx) / (3.0*r4)
             else:
-                return {'count': self.precision, 'x': x, 'y': y}
+                return self.precision
 
             absv2 = (x-oldx) * (x-oldx) + (y-oldy) * (y-oldy)
 

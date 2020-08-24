@@ -182,7 +182,7 @@ if __name__ == "__main__":
     parser.add_argument('-cm', '--color_multiplier', default=2, type=float,
                         help='the number used as the multiplier for color rotations')
     parser.add_argument('-ft', '--file_type', default='gif', type=str, help="the file type of the animation output",
-                        choices=['gif', 'mp4'])
+                        choices=['gif', 'avi'])
     parser.add_argument('-fps', '--frames_per_second', default=30, type=int,
                         help="frames per second for video output, defaults to 30")
     # parser.add_argument('-cl', '--constant_left', type=float)

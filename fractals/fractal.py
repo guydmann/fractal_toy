@@ -40,6 +40,7 @@ class Fractal(object):
             for cy in range(self.height):
                 self.fractal_array[cx][cy] = \
                     self.dwell_cell((cx*self.x_inc)+self.viewport['left_x'], self.viewport['top_y']-(cy*self.y_inc))
+        return self.fractal_array
 
     def preprocess(self):
         self.verify_data_preprocessing()
