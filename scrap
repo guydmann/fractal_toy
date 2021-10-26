@@ -9,8 +9,12 @@ python generate_fractal_image.py -a julia -c hue_range -hs 0 -he 183 -W 800 -H 8
 python generate_fractal_image.py -a julia -c hue_cyclic -hs 0 -hss 30 -cc 10 -W 800 -H 800 -vl 1.5084225333333332 -vr 1.5154225333333332 -vt -0.09008266666666645 -vb -0.09269386666666646 -A hue_cycle -i 36 -cr -0.844 -ci 0.2 -ft avi -fps 20
 #80s
 python generate_fractal_image.py -a star -c hue_cyclic -hs 0 -hss 36 -cc 10 -W 800 -H 800 -vl -2 -vr 2 -vt 2 -vb -2 -A hue_cycle -i 100 -ft avi -fps 10
+    # zoomed 80s
+    python generate_fractal_image.py -a star -c hue_cyclic -hs 0 -hss 36 -cc 10 -W 800 -H 800 -vl -1 -vr 1 -vt 1 -vb -1 -A hue_cycle -i 100 -ft avi -fps 10
 # tunnel vision
 python generate_fractal_image.py -a star -c hue_cyclic -hs 37 -hss 13 -cc 12 -W 800 -H 800 -vl -2 -vr 2 -vt 2 -vb -2 -A hue_cycle -i 100 -ft avi -fps 10
+    # improve tunnel vision
+python generate_fractal_image.py -a star -c hue_cyclic -hs 37 -hss 13 -cc 12 -W 800 -H 800 -vl -1 -vr 1 -vt 1 -vb -1 -A hue_cycle -i 100 -ft avi -fps 10
 
 python generate_fractal_image.py -a burning_ship -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 600 -vl -1.82 -vr -1.55 -vt -.08 -vb .01 -A hue_cycle -i 30 -ft avi -fps 10
 
