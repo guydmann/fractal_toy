@@ -1,6 +1,5 @@
 from __future__ import division
 from progressbar import ProgressBar
-from imageio import mimsave, imread
 from animations.animation import Animation
 from fractals.cubic_julia import CubicJulia
 from fractals.cubic_mandelbrot import CubicMandelbrot
@@ -24,7 +23,6 @@ class RandomCubicJulia(Animation):
 
         self.fractal.set_width(fractal_backup.width)
         self.fractal.set_height(fractal_backup.height)
-        self.fractal.set_precision(fractal_backup.precision)
 
         calc_pbar = ProgressBar(maxval=self.increments)
         print("Generating Cubic Mandelbrot Set")
@@ -34,8 +32,8 @@ class RandomCubicJulia(Animation):
         random_x = random.randint(0, self.fractal.width-1)
         random_y = random.randint(0, self.fractal.height-1)
         print("Searching for Starting Point")
-        while not (self.fractal.precision * .8 <=
-                   self.fractal.fractal_array[random_x][random_y] < self.fractal.precision * .95):
+        while not (self.fractal.precision * .9 <=
+                   self.fractal.fractal_array[random_x][random_y] < self.fractal.precision):
             random_x = random.randint(0, self.fractal.width-1)
             random_y = random.randint(0, self.fractal.height-1)
         print("the Mandelbrot Value is {val}".format(val=self.fractal.fractal_array[random_x][random_y]))
@@ -54,9 +52,15 @@ class RandomCubicJulia(Animation):
         self.fractal.set_color_algorithm_name(fractal_backup.color_algorithm_name)
         self.fractal.set_color_algorithm(fractal_backup.color_algorithm)
 
+        self.fractal.set_viewport_left(fractal_backup.viewport['left_x'])
+        self.fractal.set_viewport_right(fractal_backup.viewport['right_x'])
+        self.fractal.set_viewport_top(fractal_backup.viewport['top_y'])
+        self.fractal.set_viewport_bottom(fractal_backup.viewport['bottom_y'])
+
         self.fractal.set_width(fractal_backup.width)
         self.fractal.set_height(fractal_backup.height)
         self.fractal.set_precision(fractal_backup.precision)
+        self.fractal.set_image_filtering(fractal_backup.image_filter)
 
         self.fractal.set_real_constant(x)
         self.fractal.set_imaginary_constant(y)

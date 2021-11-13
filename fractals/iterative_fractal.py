@@ -27,6 +27,7 @@ class IterativeFractal(Fractal):
                 for cy in range(self.height):
                     img.putpixel((cx, cy), precomputed_colors[self.fractal_array[cx][cy]])
             img.save('{}.png'.format(self.filename), 'PNG')
+            self.apply_post_rendering_image_filters()
             return '{}.png'.format(self.filename)
         else:
             return True

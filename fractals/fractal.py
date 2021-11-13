@@ -1,5 +1,7 @@
 from __future__ import division
 import datetime
+import cv2
+import numpy as np
 from os import mkdir, path
 
 
@@ -31,6 +33,7 @@ class Fractal(object):
                 'bottom_y': -1.0}
     preprocessed = False
     generate_image = True
+    image_filter = None
 
     def dwell_cell(self, x, y):
         pass
@@ -68,6 +71,65 @@ class Fractal(object):
         self.fractal_array = self.create_empty_fractal_array(self.width, self.height)
 
         self.verify_data_postprocessing()
+
+    def apply_post_rendering_image_filters(self):
+        image_filters = []
+        if self.image_filter == "basic":
+            image_filters = ["bilateral_filter"]
+        elif self.image_filter == "blur":
+            image_filters = ["blur"]
+        elif self.image_filter == "glow_takeover":
+            image_filters = ["color_glow_takeover", "bilateral_filter"]
+        elif self.image_filter == "additive_glow":
+            image_filters = ["additive_glow", "bilateral_filter"]
+
+        debugging_cv_output = False
+        cv_image_data = original_image = cv2.imread('{}.png'.format(self.filename))
+        for image_filter in image_filters:
+            if image_filter == "bilateral_filter":
+                cv_image_data = cv2.bilateralFilter(cv_image_data, 4, 35, 35)
+            if image_filter == "blur":
+                cv_image_data = cv2.blur(cv_image_data, (2, 2))
+            if image_filter == "additive_color_glow":
+                # cv_temp_data = cv2.bilateralFilter(cv_image_data, 4, 35, 35)
+                cv_temp_data = cv2.blur(cv_image_data, (2, 2))
+                diff = cv2.absdiff(original_image, cv_temp_data)
+                mask = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
+
+                th = 1
+                imask = mask > th
+                canvas = np.zeros_like(cv_image_data, np.uint8)
+                canvas[imask] = cv_image_data[imask]
+
+                alpha = 0.8
+                beta = (1.0 - alpha)
+                cv_image_data = cv2.addWeighted(cv_image_data, alpha, canvas, beta, 20.0)
+
+                if debugging_cv_output:
+                    cv2.imshow('Diff Image', canvas)
+                    cv2.imshow('Additive Image', cv_image_data)
+
+            if image_filter == "color_glow_takeover":
+                cv_temp_data = cv2.blur(cv_image_data, (4, 4))
+                # cv_temp_data = cv2.bilateralFilter(cv_image_data, 4, 35, 35)
+                diff = cv2.absdiff(original_image, cv_temp_data)
+                mask = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
+
+                th = 1
+                imask = mask > th
+                canvas = np.zeros_like(cv_image_data, np.uint8)
+                canvas[imask] = cv_image_data[imask]
+
+                cv_image_data = canvas
+
+                if debugging_cv_output:
+                    cv2.imshow('override output', cv_image_data)
+
+            if debugging_cv_output:
+                cv2.imshow('Original Image', original_image)
+                cv2.imshow('Final Image', cv_image_data)
+                cv2.waitKey()
+            cv2.imwrite('{}.png'.format(self.filename), cv_image_data)
 
     def verify_data_preprocessing(self):
         if self.viewport is None:
@@ -189,8 +251,11 @@ class Fractal(object):
     def set_show_progress_bar(self, show):
         self.show_progress_bar = show
 
-    def set_verbopse(self, verbose):
+    def set_verbose(self, verbose):
         self.verbose = verbose
+
+    def set_image_filtering(self, filter):
+        self.image_filter = filter
 
     def create_empty_fractal_array(self, num_rows, num_cols):
         """

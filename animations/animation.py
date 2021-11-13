@@ -1,7 +1,6 @@
 import datetime
 import cv2
 import numpy as np
-
 from fractal_lib import FractalLib
 from os import mkdir, path
 from imageio import mimsave, imread
@@ -21,7 +20,7 @@ class Animation(object):
     def animate(self):
         self.preprocess()
         image_file_list = self.generate_images()
-        filename = self.save(image_file_list)
+        self.filename = self.save(image_file_list)
 
     def generate_images(self):
         raise NotImplemented
@@ -43,62 +42,11 @@ class Animation(object):
             fourcc = cv2.VideoWriter_fourcc(*'H264') # 'm','p','4','v')
             video = cv2.VideoWriter(output_filename, fourcc, self.frames_per_second, (width, height))
 
-            # basic
-            self.video_filters = ["bilateral_filter"]
-            # working
-            self.video_filters = ["color_glow_takeover", "bilateral_filter"]
-            debugging_cv_output = False
             for image in image_files:
-                cv_image_data = original_image = cv2.imread(image)
-                for vid_filter in self.video_filters:
-                    if vid_filter == "bilateral_filter":
-                        cv_image_data = cv2.bilateralFilter(cv_image_data, 4, 35, 35)
-                    if vid_filter == "blur":
-                        cv_image_data = cv2.blur(cv_image_data, (2, 2))
-                    if vid_filter == "additive_color_glow":
-                        # cv_temp_data = cv2.bilateralFilter(cv_image_data, 4, 35, 35)
-                        cv_temp_data = cv2.blur(cv_image_data, (2, 2))
-                        diff = cv2.absdiff(original_image, cv_temp_data)
-                        mask = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
-
-                        th = 1
-                        imask = mask > th
-                        canvas = np.zeros_like(cv_image_data, np.uint8)
-                        canvas[imask] = cv_image_data[imask]
-
-                        alpha = 0.8
-                        beta = (1.0 - alpha)
-                        cv_image_data = cv2.addWeighted(cv_image_data, alpha, canvas, beta, 20.0)
-
-                        if debugging_cv_output:
-                            cv2.imshow('Diff Image', canvas)
-                            cv2.imshow('Additive Image', cv_image_data)
-
-                    if vid_filter == "color_glow_takeover":
-                        cv_temp_data = cv2.blur(cv_image_data, (4, 4))
-                        # cv_temp_data = cv2.bilateralFilter(cv_image_data, 4, 35, 35)
-                        diff = cv2.absdiff(original_image, cv_temp_data)
-                        mask = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
-
-                        th = 1
-                        imask = mask > th
-                        canvas = np.zeros_like(cv_image_data, np.uint8)
-                        canvas[imask] = cv_image_data[imask]
-
-                        cv_image_data = canvas
-
-                        if debugging_cv_output:
-                            cv2.imshow('override output', cv_image_data)
-
-                if debugging_cv_output:
-                    cv2.imshow('Original Image', original_image)
-                    cv2.imshow('Final Image', cv_image_data)
-                    cv2.waitKey()
-
-                video.write(cv_image_data)
+                original_image = cv2.imread(image)
+                video.write(original_image)
             video.release()
-
-        cv2.destroyAllWindows()
+            cv2.destroyAllWindows()
         return output_filename
 
     def set_fractal(self, new_fractal):

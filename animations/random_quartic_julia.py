@@ -1,9 +1,8 @@
 from __future__ import division
 from progressbar import ProgressBar
-from imageio import mimsave, imread
 from animations.animation import Animation
-from fractals.cubic_julia import CubicJulia
-from fractals.cubic_mandelbrot import CubicMandelbrot
+from fractals.quartic_mandelbrot import QuarticMandelbrot
+from fractals.quartic_julia import QuarticJulia
 import numpy as np
 import copy
 import random
@@ -17,14 +16,13 @@ class RandomQuarticJulia(Animation):
     def generate_images(self):
         fractal_backup = copy.deepcopy(self.fractal)
 
-        self.fractal = CubicMandelbrot()
+        self.fractal = QuarticMandelbrot()
         self.fractal.set_directory(fractal_backup.directory)
         self.fractal.set_color_algorithm_name(fractal_backup.color_algorithm_name)
         self.fractal.set_color_algorithm(fractal_backup.color_algorithm)
 
         self.fractal.set_width(fractal_backup.width)
         self.fractal.set_height(fractal_backup.height)
-        self.fractal.set_precision(fractal_backup.precision)
 
         calc_pbar = ProgressBar(maxval=self.increments)
         print("Generating Quartic Mandelbrot Set")
@@ -34,7 +32,7 @@ class RandomQuarticJulia(Animation):
         random_x = random.randint(0, self.fractal.width-1)
         random_y = random.randint(0, self.fractal.height-1)
         print("Searching for Starting Point")
-        while not (self.fractal.precision > self.fractal.fractal_array[random_x][random_y] > (self.fractal.precision * 0.98)):
+        while not (self.fractal.precision > self.fractal.fractal_array[random_x][random_y] >= (self.fractal.precision * 0.90)):
             random_x = random.randint(0, self.fractal.width-1)
             random_y = random.randint(0, self.fractal.height-1)
         print("the Mandelbrot Value is {val}".format(val=self.fractal.fractal_array[random_x][random_y]))
@@ -46,14 +44,20 @@ class RandomQuarticJulia(Animation):
         calc_pbar.start()
         results = []
 
-        self.fractal = CubicJulia()
+        self.fractal = QuarticJulia()
         self.fractal.set_directory(fractal_backup.directory)
         self.fractal.set_color_algorithm_name(fractal_backup.color_algorithm_name)
         self.fractal.set_color_algorithm(fractal_backup.color_algorithm)
 
+        self.fractal.set_viewport_left(fractal_backup.viewport['left_x'])
+        self.fractal.set_viewport_right(fractal_backup.viewport['right_x'])
+        self.fractal.set_viewport_top(fractal_backup.viewport['top_y'])
+        self.fractal.set_viewport_bottom(fractal_backup.viewport['bottom_y'])
+
         self.fractal.set_width(fractal_backup.width)
         self.fractal.set_height(fractal_backup.height)
         self.fractal.set_precision(fractal_backup.precision)
+        self.fractal.set_image_filtering(fractal_backup.image_filter)
 
         self.fractal.set_real_constant(x)
         self.fractal.set_imaginary_constant(y)

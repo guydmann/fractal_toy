@@ -1,7 +1,5 @@
 from __future__ import division
 from progressbar import ProgressBar
-from imageio import mimsave, imread
-from animations.animation import Animation
 import math
 
 __author__ = 'guydmann'
@@ -21,8 +19,8 @@ class SecondHueRotation(HueRotation):
         h_end = self.fractal.color_algorithm.end_degree
         multiplier = self.color_multiplier
         for k in range(self.increments):
-            self.fractal.color_algorithm.set_start_degree((int)(abs(math.sin(math.radians((h_start+(multiplier*k)))/(2*math.pi)))*380))
-            self.fractal.color_algorithm.set_end_degree((int)(abs(math.sin(math.radians((h_end+(multiplier*k)))/(2*math.pi)))*380))
+            self.fractal.color_algorithm.set_start_degree((int)(abs(math.sin(math.radians((h_start+(multiplier*k)))/(2*math.pi)))*360))
+            self.fractal.color_algorithm.set_end_degree((int)(abs(math.sin(math.radians((h_end+(multiplier*k)))/(2*math.pi)))*360))
 
             self.fractal.set_filename("{}{}_{}_{}_{}".format(self.fractal.directory,
                                                              self.animation_name,

@@ -43,7 +43,9 @@ class TraversalFractal(Fractal):
                     color_pbar.update(cx+1)
             if self.show_progress_bar:
                 color_pbar.finish()
-            img.save('{}.png'.format(self.filename), 'PNG')
-            return '{}.png'.format(self.filename)
+            filename_with_extension = '{}.png'.format(self.filename)
+            img.save(filename_with_extension, 'PNG')
+            self.apply_post_rendering_image_filters()
+            return filename_with_extension
         else:
             return True

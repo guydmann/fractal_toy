@@ -49,8 +49,8 @@ def setup_fractal_color_scheme(fractal, args):
         if args.color_count:
             color.set_color_count(args.color_count)
 
-        fractal.set_color_algorithm_name("{}-{}-{}".format(
-            args.color_algorithm, color.start_degree, color.color_step_shift))
+        fractal.set_color_algorithm_name("{}-{}-{}-{}".format(
+            args.color_algorithm, color.start_degree, color.color_step_shift, color.color_count))
     fractal.set_color_algorithm(color)
     return fractal
 
@@ -128,6 +128,8 @@ def main(args):
         fractal.set_filename(args.filename)
     if args.precision is not None:
         fractal.set_precision(args.precision)
+    if args.image_filtering is not None:
+        fractal.set_image_filtering(args.image_filtering)
 
     # needs to be done after the setting of precision so the precision can be used in color calculations
     fractal = setup_fractal_color_scheme(fractal, args)
@@ -171,6 +173,10 @@ if __name__ == "__main__":
                         help='use to define hue steps to take in the cyclic hue color algorithm')
     parser.add_argument('-cc', '--color_count', type=int,
                         help='use to define the number of colors to cycle through in the cyclic color algorithms')
+
+    # image filtering
+    parser.add_argument('-if', '--image_filtering', default="none", type=str,
+                        choices=['none', 'basic', 'glow_takeover', 'additive_glow', 'blur'])
 
     # animation variables
     parser.add_argument('-A', '--fractal_animation',  type=str, help='int to select animation',

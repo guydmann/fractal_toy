@@ -1,7 +1,5 @@
 from __future__ import division
 from progressbar import ProgressBar
-from imageio import mimsave, imread
-from animations.animation import Animation
 
 __author__ = 'guydmann'
 
