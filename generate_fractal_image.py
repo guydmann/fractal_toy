@@ -18,6 +18,7 @@ from animations.random_cubic_julia import RandomCubicJulia
 from animations.random_phoenix_julia import RandomPhoenixJulia
 from animations.random_quartic_julia import RandomQuarticJulia
 from animations.random_walk_julia import RandomWalkJulia
+from animations.julia_searching_walk import JuliaSearchingWalk
 
 
 def setup_fractal(args):
@@ -103,8 +104,6 @@ def setup_fractal_animation(fractal, args):
             if args.color_algorithm != "hue_range":
                 raise Exception('only hue_range should be used for this animation')
             animation = SecondHueRotation()
-        if args.color_multiplier:
-            animation.set_color_multiplier(args.color_multiplier)
     elif args.fractal_animation == "hue_cycle":
         if args.color_algorithm != "hue_cyclic":
             raise Exception('only hue_cyclic should be used for this animation')
@@ -120,6 +119,8 @@ def setup_fractal_animation(fractal, args):
         animation = RandomQuarticJulia()
     elif args.fractal_animation == "random_walk_julia":
         animation = RandomWalkJulia()
+    elif args.fractal_animation == "julia_searching_walk":
+        animation = JuliaSearchingWalk()
     else:
         fractal.set_show_progress_bar(False)
 
@@ -214,11 +215,9 @@ if __name__ == "__main__":
     parser.add_argument('-A', '--fractal_animation',  type=str, help='int to select animation',
                         choices=['first_hue_rotation', 'second_hue_rotation', 'hue_cycle', 'random_julia',
                                  'random_cubic_julia', 'random_phoenix_julia', 'random_quartic_julia',
-                                 'random_walk_julia'])
+                                 'random_walk_julia', 'julia_searching_walk'])
     parser.add_argument('-i', '--increments', default=40, type=int,
                         help='number of increments in the animation, this may end up being doubled in looping animations')
-    parser.add_argument('-cm', '--color_multiplier', default=2, type=float,
-                        help='the number used as the multiplier for color rotations')
     parser.add_argument('-ft', '--file_type', default='gif', type=str, help="the file type of the animation output",
                         choices=['gif', 'avi'])
     parser.add_argument('-fps', '--frames_per_second', default=30, type=int,

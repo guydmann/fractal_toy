@@ -55,6 +55,8 @@ class RandomWalkJulia(Animation):
 
         self.fractal.set_real_constant(x)
         self.fractal.set_imaginary_constant(y)
+        previously_used = []
+
 
         for k in range(self.increments):
             self.fractal.set_filename("{}{}_{}_forward".format(self.fractal.directory, self.animation_name, k))
@@ -63,9 +65,10 @@ class RandomWalkJulia(Animation):
 
             prev_x = random_x
             prev_y = random_y
-            while random_x == prev_x and random_y == prev_y:
-                random_x += random.randint(-3, 3)
-                random_y += random.randint(-3, 3)
+            previously_used.append((prev_x, prev_y))
+            while random_x == prev_x and random_y == prev_y and (random_x, random_y) in previously_used:
+                random_x += random.randint(-1, 1)
+                random_y += random.randint(-1, 1)
             x = real_space[random_x]
             y = imaginary_space[random_y]
             self.fractal.set_real_constant(x)

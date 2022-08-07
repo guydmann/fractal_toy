@@ -17,7 +17,7 @@ class SecondHueRotation(HueRotation):
         results = []
         h_start = self.fractal.color_algorithm.start_degree
         h_end = self.fractal.color_algorithm.end_degree
-        multiplier = self.color_multiplier
+        multiplier = (h_end-h_start) / self.increments
         for k in range(self.increments):
             self.fractal.color_algorithm.set_start_degree((int)(abs(math.sin(math.radians((h_start+(multiplier*k)))/(2*math.pi)))*360))
             self.fractal.color_algorithm.set_end_degree((int)(abs(math.sin(math.radians((h_end+(multiplier*k)))/(2*math.pi)))*360))

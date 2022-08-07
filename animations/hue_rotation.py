@@ -5,7 +5,5 @@ __author__ = 'guydmann'
 
 
 class HueRotation(Animation):
-    color_multiplier = None
-
-    def set_color_multiplier(self, new_color_multiplier):
-        self.color_multiplier = new_color_multiplier
+    # place holder
+    pass

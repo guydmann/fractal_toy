@@ -16,10 +16,10 @@ class FirstHueRotation(HueRotation):
         results = []
         h_start = self.fractal.color_algorithm.start_degree
         h_end = self.fractal.color_algorithm.end_degree
-        multiplier = self.color_multiplier
+        multiplier = (h_end-h_start) / self.increments
         for k in range(self.increments):
-            self.fractal.color_algorithm.set_start_degree((h_start + (multiplier * k)))
-            self.fractal.color_algorithm.set_end_degree((h_end + (multiplier * k)))
+            self.fractal.color_algorithm.set_start_degree((h_start + (multiplier * k)) % 360)
+            self.fractal.color_algorithm.set_end_degree((h_end + (multiplier * k)) % 360)
 
             self.fractal.set_filename("{}{}_{}_{}_{}".format(self.fractal.directory,
                                                              self.animation_name,
