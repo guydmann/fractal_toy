@@ -68,7 +68,7 @@ class Fractal(object):
                                                                  self.width,
                                                                  i.isoformat().replace(":","")))
         self.preprocessed = True
-        self.fractal_array = self.create_empty_fractal_array(self.width, self.height)
+        self.fractal_array = Fractal.create_empty_fractal_array(self.width, self.height)
 
         self.verify_data_postprocessing()
 
@@ -257,7 +257,8 @@ class Fractal(object):
     def set_image_filtering(self, filter):
         self.image_filter = filter
 
-    def create_empty_fractal_array(self, num_rows, num_cols):
+    @staticmethod
+    def create_empty_fractal_array(num_rows, num_cols):
         """
         create_empty_fractal_array generates a 3 dimensional data structure which has a [num_rows][num_cols][3] structure.
         it is used to store the data about the fractals

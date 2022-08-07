@@ -1,5 +1,6 @@
 import os
 
+
 class FractalLib:
     fractal_mapping = {
         "mandelbrot"                : "Mandelbrot",
@@ -22,13 +23,13 @@ class FractalLib:
         "simple"                : "Simple",
         "black_and_white"       : "BlackAndWhite",
         "hue_range"             : "HueRange",
-        "rgba_cyclic"           : "RGBACyclic"
+        "rgba_cyclic"           : "RGBACyclic",
     }
 
     @staticmethod
     def empty_dir_and_remove(directory):
         path = "{}/".format(directory)
-        if (os.path.isdir(directory)):
+        if os.path.isdir(directory):
             files = os.listdir(path)
             if len(files):
                 for f in files:

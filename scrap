@@ -59,6 +59,12 @@ python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.13 -c hue_cyc
 python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.13 -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl 0.18167315999999986 -vr 0.23479310666666653 -vt 0.8372443851851852 -vb 0.8010526222222223 -A hue_cycle -i 30
 
 python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.135 -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.25 -vb -1.25 -A hue_cycle -i 30
+python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.135 -c rgba_cyclic -rgbas '{"red": 6, "green": 190, "blue": 78, "alpha": 255}' -rgbass '{"red": 50, "green": 10, "blue": 30, "alpha": 0}' -cc 30 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.25 -vb -1.25
+python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.139 -c rgba_cyclic -rgbas '{"red": 126, "green": 50, "blue": 90, "alpha": 255}' -rgbass '{"red": 10, "green": 40, "blue": 30, "alpha": 0}' -cc 12 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.25 -vb -1.25
+python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.139 -c rgba_range -rgbas '{"red": 126, "green": 50, "blue": 90, "alpha": 255}' -rgbae '{"red": 10, "green": 40, "blue": 30, "alpha": 0}' -cc 12 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.25 -vb -1.25
+python generate_fractal_image.py -a quartic_julia -cr -0.772 -ci 0.139 -c rgba_range -rgbas '{"red": 126, "green": 50, "blue": 90, "alpha": 255}' -rgbae '{"red": 240, "green": 40, "blue": 30, "alpha": 255}' -cc 30 -W 800 -H 800 -vl -1.5 -vr 1.5 -vt 1.25 -vb -1.25
+
+
 
 
 python generate_fractal_image.py -c hue_cyclic -hs 0 -hss 12 -cc 30 -W 800 -H 800 -A random_julia -i 50

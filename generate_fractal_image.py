@@ -1,11 +1,14 @@
 import argparse
+import json
 
+from colors.rgba_range import RGBARange
 from fractal_lib import FractalLib
 
 from colors.simple import Simple
 from colors.black_and_white import BlackAndWhite
 from colors.hue_range import HueRange
 from colors.hue_cyclic import HueCyclic
+from colors.rgba_cyclic import RGBACyclic
 
 from animations.first_hue_rotation import FirstHueRotation
 from animations.second_hue_rotation import SecondHueRotation
@@ -51,6 +54,27 @@ def setup_fractal_color_scheme(fractal, args):
 
         fractal.set_color_algorithm_name("{}-{}-{}-{}".format(
             args.color_algorithm, color.start_degree, color.color_step_shift, color.color_count))
+    elif args.color_algorithm == "rgba_range":
+        color = RGBARange()
+        if args.rgba_start_color is not None:
+            color.set_start_color(args.rgba_start_color)
+        if args.rgba_end_color is not None:
+            color.set_end_color(args.rgba_end_color)
+        if args.color_count:
+            color.set_color_count(args.color_count)
+        fractal.set_color_algorithm_name("{}-{}-{}-{}".format(args.color_algorithm, color.start_color, color.end_color, color.color_count))
+    elif args.color_algorithm == "rgba_cyclic":
+        color = RGBACyclic()
+        if args.rgba_start_color is not None:
+            color.set_start_color(args.rgba_start_color)
+        if args.rgba_color_step_shift:
+            color.set_color_step_shift(args.rgba_color_step_shift)
+
+        if args.color_count:
+            color.set_color_count(args.color_count)
+
+        fractal.set_color_algorithm_name("{}-{}-{}-{}".format(
+            args.color_algorithm, color.start_color, color.color_step_shift, color.color_count))
     fractal.set_color_algorithm(color)
     return fractal
 
@@ -149,7 +173,7 @@ if __name__ == "__main__":
                                  'phoenix_julia', 'cubic_mandelbrot', 'quartic_mandelbrot', 'cubic_julia',
                                  'experimental_cubic_julia', 'quartic_julia', 'buddhabrot', 'buddhabrot_julia'])
     parser.add_argument('-c', '--color_algorithm', default="simple", type=str,
-                        choices=['simple', 'black_and_white', 'hue_range', 'hue_cyclic'])
+                        choices=['simple', 'black_and_white', 'hue_range', 'hue_cyclic', 'rgba_cyclic', 'rgba_range'])
     parser.add_argument('-W', '--width', type=int)
     parser.add_argument('-H', '--height', type=int)
     parser.add_argument('-vl', '--viewport_left', type=float,
@@ -171,6 +195,14 @@ if __name__ == "__main__":
                         help='use to define hue range for hue_range color algorithm')
     parser.add_argument('-hss', '--hue_step_shift', type=int,
                         help='use to define hue steps to take in the cyclic hue color algorithm')
+
+    parser.add_argument('-rgbas', '--rgba_start_color', type=json.loads,
+                        help='use to define starting RGBA color for the rbga_cyclic and rgba_range color algorithms, expects json in format \'{"red": 6, "green": 190, "blue": 78, "alpha": 255}\'')
+    parser.add_argument('-rgbae', '--rgba_end_color', type=json.loads,
+                        help='use to define hue range for rgba_range color algorithm, expects json dict in format \'{"red": 6, "green": 190, "blue": 78, "alpha": 255}\'')
+    parser.add_argument('-rgbass', '--rgba_color_step_shift', type=json.loads,
+                        help='use to define hue steps to take in the cyclic RGBA color algorithm, expects json in format \'{"red": 6, "green": 190, "blue": 78, "alpha": 255}\'')
+
     parser.add_argument('-cc', '--color_count', type=int,
                         help='use to define the number of colors to cycle through in the cyclic color algorithms')
 
@@ -184,7 +216,7 @@ if __name__ == "__main__":
                                  'random_cubic_julia', 'random_phoenix_julia', 'random_quartic_julia',
                                  'random_walk_julia'])
     parser.add_argument('-i', '--increments', default=40, type=int,
-                        help='number of increments in the animation, this m ay end up being doubled in looping animations')
+                        help='number of increments in the animation, this may end up being doubled in looping animations')
     parser.add_argument('-cm', '--color_multiplier', default=2, type=float,
                         help='the number used as the multiplier for color rotations')
     parser.add_argument('-ft', '--file_type', default='gif', type=str, help="the file type of the animation output",
