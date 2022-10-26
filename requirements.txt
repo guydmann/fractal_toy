@@ -16,7 +16,7 @@ importlib-metadata==5.0.0
 jishaku==2.5.1
 line-profiler==3.5.1
 multidict==6.0.2
-numpy==1.21.3
+numpy==1.22.0
 opencv-python==4.5.4.58
 Pillow==8.4.0
 progressbar==2.5
