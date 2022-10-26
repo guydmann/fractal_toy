@@ -1,7 +1,6 @@
 images
 rendered
 *.iml
-env
 .env
 
 # Django #
@@ -85,9 +84,7 @@ celerybeat-schedule.*
 # Environments
 .env-sample
 .venv
-env/
 venv/
-ENV/
 env.bak/
 venv.bak/
 
