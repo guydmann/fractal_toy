@@ -2,6 +2,7 @@ images
 rendered
 *.iml
 env
+.env
 
 # Django #
 *.log
@@ -82,7 +83,7 @@ celerybeat-schedule.*
 *.sage.py
 
 # Environments
-.env
+.env-sample
 .venv
 env/
 venv/

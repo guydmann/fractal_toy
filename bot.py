@@ -25,45 +25,53 @@ bot = discord.Bot(debug_guilds=[987960420851666965], intents=intents) # specify 
 # async def is_channel_fractal(ctx):
 #     return ctx.channel.id == 1001295615508086924
 
+
 def create_fractal_animation(animation, width, height, color_algorithm, fps):
     # name = str(time.time())
     subprocess.run([sys.executable, 'generate_fractal_image.py', '-A', animation, '-W', width, '-H', height, '-c', color_algorithm, '-fps', fps])
     return
+
 
 def create_fractal_art(algo, width, height, color_algorithm):
     name = str(time.time())
     subprocess.run([sys.executable, 'generate_fractal_image.py', '-a', algo, '-W', width, '-H', height, '-c', color_algorithm, '-f', name])
     return name
 
-    # os.system("python generate_fractal_image.py -a mandelbrot -A random_phoenix_julia -W 512 -H 512 -c hue_range -fps 12")
 
 def create_phoenix_cyclic():
     os.system("python generate_fractal_image.py -a mandelbrot -A random_phoenix_julia -W 512 -H 512 -c hue_cyclic -fps 12")
 
+
 def create_julia_range():
     os.system("python generate_fractal_image.py -a mandelbrot -A random_julia -W 512 -H 512 -c hue_range -fps 12")
 
+
 def create_julia_cyclic():
     os.system("python generate_fractal_image.py -a mandelbrot -A random_julia -W 512 -H 512 -c hue_cyclic -fps 12")
+
 
 async def run_blocking_animation(blocking_func: typing.Callable, *args, **kwargs) -> typing.Any:
     """Runs a blocking function in a non-blocking way"""
     func = functools.partial(create_fractal_animation, *args, **kwargs) # `run_in_executor` doesn't support kwargs, `functools.partial` does
     return await bot.loop.run_in_executor(None, func)
 
+
 async def run_blocking_art(blocking_func: typing.Callable, *args, **kwargs) -> typing.Any:
     """Runs a blocking function in a non-blocking way"""
     func = functools.partial(create_fractal_art, *args, **kwargs) # `run_in_executor` doesn't support kwargs, `functools.partial` does
     return await bot.loop.run_in_executor(None, func)
 
+
 def del_files(list_of_files):
     for f in list_of_files:
         os.remove(f)
-    
+
+
 async def run_blocking_del(blocking_func: typing.Callable, *args, **kwargs) -> typing.Any:
     """Runs a blocking function in a non-blocking way"""
     func = functools.partial(del_files, *args, **kwargs) # `run_in_executor` doesn't support kwargs, `functools.partial` does
     return await bot.loop.run_in_executor(None, func)
+
 
 @bot.command(description='Create Fractal Animation')
 async def fractal_animation(ctx, animation: Option(str, "use /animation_list to get a list of options or see pinned messages", required = True, default = 'random_phoenix_julia'),
@@ -82,6 +90,7 @@ async def fractal_animation(ctx, animation: Option(str, "use /animation_list to 
     else:
         await ctx.respond(f"**You can only use this command if you have AiFRENS role and are in the fractal-art room**", ephemeral=True)
 
+
 @bot.command(description='Create Fractal Art')
 async def fractal_art(ctx, algo: Option(str, "use /algo_list to get a list of options or see pinned messages", required = True, default = 'mandelbrot'),
     width: Option(str, "Default is 512, experiment with this", required = True, default = '512'), height: Option(str, "Default is 512, experiment with this", required = True, default = '512'), color_algorithm: Option(str, "simple, black_and_white, hue_range, hue_cyclic", required = True, default = 'hue_range'),
@@ -99,6 +108,7 @@ async def fractal_art(ctx, algo: Option(str, "use /algo_list to get a list of op
     else:
         await ctx.respond(f"**You can only use this command if you have AiFRENS role and are in the fractal-art room**", ephemeral=True)
 
+
 @bot.command(description='Show list of fractal algorithms')
 async def algo_list(ctx):
     # role = discord.utils.get(ctx.guild.roles, name="AiFREN")
@@ -106,6 +116,7 @@ async def algo_list(ctx):
         await ctx.respond("mandelbrot, julia, burning_ship, star, newton, phoenix_mandelbrot, phoenix_julia, cubic_mandelbrot, quartic_mandelbrot, cubic_julia, experimental_cubic_julia, quartic_julia, buddhabrot, buddhabrot_julia")
     else:
         await ctx.respond(f"**You can only use this command if you are in the fractal-art room**", ephemeral=True)
+
 
 @bot.command(description='Show list of fractal animations')
 async def animation_list(ctx):
