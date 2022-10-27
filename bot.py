@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 import os
 from dotenv import load_dotenv
@@ -10,6 +11,7 @@ import subprocess
 import sys
 from discord import option
 import time
+from generate_fractal_image import main as generate_fractal, add_arguments_to_parser
 
 logging.basicConfig(level=logging.INFO)
 
@@ -33,21 +35,25 @@ def create_fractal_animation(animation, width, height, color_algorithm, fps):
 
 
 def create_fractal_art(algo, width, height, color_algorithm):
-    name = str(time.time())
-    subprocess.run([sys.executable, 'generate_fractal_image.py', '-a', algo, '-W', width, '-H', height, '-c', color_algorithm, '-f', name])
-    return name
+    name = "images/{time}".format(time=time.time())
+    #subprocess.run([sys.executable, 'generate_fractal_image.py', '-a', algo, '-W', width, '-H', height, '-c', color_algorithm, '-f', name])
+    parser = argparse.ArgumentParser(add_help=True)
+    parser = add_arguments_to_parser(parser)
+    argument_list = [
+        '--fractal_algorithm', algo,
+        '--width', str(width),
+        '--height', str(height),
+        '--color_algorithm', color_algorithm,
+        '--filename', name,
+        '--real_constant', '-0.844',
+        '--imaginary_constant', '0.2',
+    ] + "--viewport_left -1 --viewport_right 1 --viewport_top 1 --viewport_bottom -1 ".split()
 
-
-def create_phoenix_cyclic():
-    os.system("python generate_fractal_image.py -a mandelbrot -A random_phoenix_julia -W 512 -H 512 -c hue_cyclic -fps 12")
-
-
-def create_julia_range():
-    os.system("python generate_fractal_image.py -a mandelbrot -A random_julia -W 512 -H 512 -c hue_range -fps 12")
-
-
-def create_julia_cyclic():
-    os.system("python generate_fractal_image.py -a mandelbrot -A random_julia -W 512 -H 512 -c hue_cyclic -fps 12")
+    print(argument_list)
+    #-cr -0.844 -ci 0.2
+    arguments = parser.parse_args(argument_list)
+    generate_fractal(arguments)
+    return f"{name}.png"
 
 
 async def run_blocking_animation(blocking_func: typing.Callable, *args, **kwargs) -> typing.Any:
@@ -145,9 +151,7 @@ async def fractal_art(
         userid = ctx.author.id
         await ctx.respond(f"<@{userid}> Starting...", ephemeral=True)
         name = await run_blocking_art(create_fractal_art, algo, width, height, color_algorithm)
-        list_of_files = glob.glob('images/*')       # "*" means all if need specific format then *.csv
-        my_filename = max(list_of_files, key=os.path.getctime)
-        await ctx.respond(content=f"<@{userid}> **algorithm: {algo}, width: {width}, height: {height}, color_algorith: {color_algorithm}**", file=discord.File(my_filename))
+        await ctx.respond(content=f"<@{userid}> **algorithm: {algo}, width: {width}, height: {height}, color_algorith: {color_algorithm}**", file=discord.File(name))
     else:
         await ctx.respond(
             "**You can only use this command if you have AiFRENS role and are in the fractal-art room**",

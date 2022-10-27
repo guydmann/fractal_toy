@@ -166,8 +166,7 @@ def main(args):
         fractal.render()
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(add_help=True)
+def add_arguments_to_parser(parser):
     parser.add_argument('-f', '--filename', type=str, help='do not include file extension')
     parser.add_argument('-a', '--fractal_algorithm', default="mandelbrot", type=str,
                         choices=['mandelbrot', 'julia', 'burning_ship', 'star', 'newton', 'phoenix_mandelbrot',
@@ -212,7 +211,7 @@ if __name__ == "__main__":
                         choices=['none', 'basic', 'glow_takeover', 'additive_glow', 'blur'])
 
     # animation variables
-    parser.add_argument('-A', '--fractal_animation',  type=str, help='int to select animation',
+    parser.add_argument('-A', '--fractal_animation', type=str, help='int to select animation',
                         choices=['first_hue_rotation', 'second_hue_rotation', 'hue_cycle', 'random_julia',
                                  'random_cubic_julia', 'random_phoenix_julia', 'random_quartic_julia',
                                  'random_walk_julia', 'julia_searching_walk'])
@@ -228,6 +227,11 @@ if __name__ == "__main__":
     # parser.add_argument('-cb', '--constant_bottom', type=float)
     # parser.add_argument('-t', '--traversal', type=str,
     #                    choices=['diagonal', 'spiral'])
+    return parser
 
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(add_help=True)
+    parser = add_arguments_to_parser(parser)
     arguments = parser.parse_args()
     main(arguments)
