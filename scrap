@@ -84,3 +84,12 @@ python generate_fractal_image.py -c hue_cyclic -hs 155 -hss 36 -cc 30 -W 800 -H 
 python generate_fractal_image.py -c hue_cyclic -hs 203 -hss 43 -cc 30 -W 400 -H 400 -A random_quartic_julia -i 50
 
 python generate_fractal_image.py -c hue_range -hs 20 -he 240 -W 400 -H 400 -A julia_searching_walk
+
+
+
+
+
+
+
+
+

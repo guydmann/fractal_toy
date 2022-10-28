@@ -133,6 +133,12 @@ def setup_fractal_animation(fractal, args):
     if args.file_type:
         animation.set_file_type(args.file_type)
 
+    # if it is an animation then set the filename for the output animation
+    if args.filename is not None:
+        animation.set_filename(args.filename)
+    if args.animation_directory is not None:
+        animation.set_directory(args.animation_directory)
+
     animation.set_fractal(fractal)
     return animation
 
@@ -149,8 +155,6 @@ def main(args):
         fractal.set_real_constant(args.real_constant)
     if args.imaginary_constant is not None:
         fractal.set_imaginary_constant(args.imaginary_constant)
-    if args.filename is not None:
-        fractal.set_filename(args.filename)
     if args.precision is not None:
         fractal.set_precision(args.precision)
     if args.image_filtering is not None:
@@ -163,6 +167,9 @@ def main(args):
         animation = setup_fractal_animation(fractal, args)
         animation.animate()
     else:
+        # if we are just generating an image then set the filename for the output image
+        if args.filename is not None:
+            fractal.set_filename(args.filename)
         fractal.render()
 
 
@@ -219,6 +226,7 @@ def add_arguments_to_parser(parser):
                         help='number of increments in the animation, this may end up being doubled in looping animations')
     parser.add_argument('-ft', '--file_type', default='gif', type=str, help="the file type of the animation output",
                         choices=['gif', 'avi'])
+    parser.add_argument('-ad', '--animation_directory', type=str, help="the directory to use to store the images in the animation")
     parser.add_argument('-fps', '--frames_per_second', default=30, type=int,
                         help="frames per second for video output, defaults to 30")
     # parser.add_argument('-cl', '--constant_left', type=float)
