@@ -20,4 +20,4 @@ check out the `scrap` file for examples of commands I've used
 
 ## for the bot
 
-copy and rename the `.env-sample` to `.env` and add your discord token
+copy and rename the `.env-sample` to `.env` and add your discord token and the channel_id for the channel it will communicate in
