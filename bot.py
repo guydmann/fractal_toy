@@ -31,8 +31,6 @@ def create_fractal_animation(fractal_args):
     for key, value in fractal_args.items():
         argument_list.append(f"--{key}")
         argument_list.append(str(value))
-    print("fractal animation")
-    print(argument_list)
     subprocess.run(argument_list)
     return f"{name}.gif"
 
@@ -43,8 +41,6 @@ def create_fractal_art(fractal_args):
     for key, value in fractal_args.items():
         argument_list.append(f"--{key}")
         argument_list.append(str(value))
-    print("fractal art")
-    print(argument_list)
     subprocess.run(argument_list)
     return f"{name}.png"
 
@@ -155,10 +151,12 @@ async def fractal_art(
             fractal_args["color_count"] = color_count
         if image_filtering:
             fractal_args["image_filtering"] = image_filtering
-        print("fractal art")
-        print(fractal_args)
         name = await run_blocking_art(create_fractal_art, fractal_args)
-        await ctx.respond(content=f"<@{userid}> **algorithm: {fractal_algorithm}, width: {width}, height: {height}, color_algorith: {color_algorithm}**", file=discord.File(name))
+        flag_list = []
+        for key, value in fractal_args.items():
+            flag_list.append(f"{key}:{value}")
+        flags = ", ".join(flag_list)
+        await ctx.respond(content=f"<@{userid}> **{flags}**", file=discord.File(name))
     else:
         await ctx.respond(
             "**You can only use this command if you have AiFRENS role and are in the fractal-art room**",
@@ -268,8 +266,20 @@ async def fractal_animation(
         if color_count:
             fractal_args["color_count"] = color_count
 
+        if fractal_animation in ["second_hue_rotation", "first_hue_rotation"] and fractal_args["color_algorithm"] != "hue_range":
+            fractal_args["color_algorithm"] = "hue_range"
+            await ctx.respond(content=f"<@{userid}> The color algorithm has been changed to hue_range because a hue_rotation animation has been selected")
+        if fractal_animation == "hue_cycle" and fractal_args["color_algorithm"] != "hue_cyclic":
+            fractal_args["color_algorithm"] = "hue_cyclic"
+            await ctx.respond(content=f"<@{userid}> The color algorithm has been changed to hue_cyclic because the hue_cycle animation has been selected")
+
+
         name = await run_blocking_animation(create_fractal_animation, fractal_args)
-        await ctx.respond(content=f"<@{userid}> **fractal_animation: {fractal_animation}, width: {width}, height: {height}, color_algorith: {color_algorithm}, frames_per_second: {frames_per_second}**", file=discord.File(name))
+        flag_list = []
+        for key, value in fractal_args.items():
+            flag_list.append(f"{key}: {value}")
+        flags = ", ".join(flag_list)
+        await ctx.respond(content=f"<@{userid}> **{flags}**", file=discord.File(name))
         list_of_files = glob.glob(f'images/{fractal_animation}/*') # * means all if need specific format then *.csv
         await run_blocking_del(del_files, list_of_files)
     else:
