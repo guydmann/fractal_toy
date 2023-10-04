@@ -18,7 +18,7 @@ line-profiler==3.5.1
 multidict==6.0.2
 numpy==1.23.4
 opencv-python==4.6.0.66
-Pillow==9.2.0
+Pillow==10.0.1
 progressbar==2.5
 py-cord==2.2.2
 python-dotenv==0.21.0
